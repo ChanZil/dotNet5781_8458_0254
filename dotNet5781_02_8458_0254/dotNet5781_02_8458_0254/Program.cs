@@ -11,8 +11,8 @@ namespace dotNet5781_02_8458_0254
         enum Menu { add, remove, search, print, exit}
         static void Main(string[] args)
         {
-            BusLineCollection busLines = new BusLineCollection();
-            List<BusStopLine> stations = new List<BusStopLine>(); //contains 40 stations
+            BusLineCollection busLines = new BusLineCollection(); //the collection of the bus lines
+            List<BusStopLine> stations = new List<BusStopLine>(); //list of all statoins
             for (int i = 0; i < 40; i++) //pass the array of the stations 
             {
                 BusStopLine b = new BusStopLine();
