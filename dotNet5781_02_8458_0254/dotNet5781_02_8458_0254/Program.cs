@@ -136,7 +136,7 @@ namespace dotNet5781_02_8458_0254
                         }
                     case Menu.print:
                         {
-                            Console.WriteLine("");
+                            Console.WriteLine("Enter 0 to print the bus lines and 1 to print the stations");
                             int choice = int.Parse(Console.ReadLine());
                             if (choice == 0)
                             {
