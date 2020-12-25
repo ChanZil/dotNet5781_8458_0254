@@ -28,7 +28,7 @@ namespace dotNet5781_03B_8458_0254
             lbBuses.ItemsSource = BusList.buses; //the source of the listbox is the list of the buses
         }
 
-        private void btnAddBus_Click(object sender, RoutedEventArgs e) //add bus
+        private void btnAddBus_Click(object sender, RoutedEventArgs e) //add bus to the list
         {
             AddBus addBus = new AddBus();
             addBus.Show();
