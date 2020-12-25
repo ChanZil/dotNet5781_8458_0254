@@ -40,7 +40,7 @@ namespace dotNet5781_03B_8458_0254
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) //
+        private void Button_Click(object sender, RoutedEventArgs e) //send to bus to drive button
         {
             Button cmd = (Button)sender;
             SendDrive sendDrive = new SendDrive(cmd.DataContext);
