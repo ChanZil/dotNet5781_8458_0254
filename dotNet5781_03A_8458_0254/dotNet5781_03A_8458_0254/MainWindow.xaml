@@ -1,0 +1,39 @@
+﻿<Window x:Class="dotNet5781_03A_8458_0254.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotNet5781_03A_8458_0254"
+        mc:Ignorable="d"
+        Title="שלום" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="751*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="256*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+VerticalAlignment="Stretch" Width="auto" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <TextBox x:Name="tbArea" HorizontalAlignment="Stretch" Margin="10,19,10,18" TextWrapping="Wrap" Text="{Binding Path=area}" VerticalAlignment="Stretch" Grid.Column="3" FontSize="16" FontFamily="Segoe UI Historic" Grid.RowSpan="2"/>
+            <ComboBox x:Name="cbBusLines" VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Path=BusLine}" SelectionChanged="cbBusLines_SelectionChanged_1" DisplayMemberPath="busLineCode"/>
+            <Label Content="Area:" HorizontalAlignment="Left" Margin="74,20,0,0" VerticalAlignment="Top" RenderTransformOrigin="11.763,0.077" Grid.Column="2" FontSize="18" Grid.RowSpan="2" FontWeight="Bold" Background="#FFC3ABAB"/>
+            <Label Content="Bus Line Number:" HorizontalAlignment="Left" Margin="28,19,0,0" VerticalAlignment="Top" FontSize="18" Grid.RowSpan="2" FontWeight="Bold" Background="#FFECCBCB"/>
+        </Grid>
+        <ListBox x:Name="lbBusLineStations" HorizontalAlignment="Left" Height="521" Margin="9.5,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="772" ItemsSource="{Binding}" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Background="#FFDCD1D1" SelectionChanged="lbBusLineStations_SelectionChanged"/>
+    </Grid>
+</Window>

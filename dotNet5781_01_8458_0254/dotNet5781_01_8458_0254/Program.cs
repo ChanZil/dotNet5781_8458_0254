@@ -32,8 +32,7 @@ namespace dotNet5781_01_8458_0254
          */
         static public void Travel(Bus bus, int kilo)
         {
-            DateTime nowDate = DateTime.Now; //save the current date
-            TimeSpan t = nowDate - bus.dateOfLastTreat; //the span of time since the last treatment
+            TimeSpan t = DateTime.Now - bus.dateOfLastTreat; //the span of time since the last treatment
             if (bus.TreatmentKM > 20000 || bus.GasKM + kilo > 1200 || t.Days > 365)
                 /*if the kilometers since the last treatment are bigger than 2000, or the bus doesnt 
                 have enough gas, or its been over a year since the last treatment- the bus can't drive*/

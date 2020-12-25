@@ -1,0 +1,32 @@
+﻿<Window x:Name="btnAdd" x:Class="dotNet5781_03B_8458_0254.AddBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotNet5781_03B_8458_0254"
+        mc:Ignorable="d"
+        Title="AddBus" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label HorizontalAlignment="Left" Margin="652,42,0,0" VerticalAlignment="Top">
+            <Label Content="מספר אוטובוס"/>
+        </Label>
+        <TextBox Name="tbNumBus" HorizontalAlignment="Left" Height="23" Margin="527,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="dpDateStart" HorizontalAlignment="Left" Margin="527,102,0,0" VerticalAlignment="Top"/>
+        <Label Content="תאריך התחלה" HorizontalAlignment="Left" Margin="660,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="נסועה" HorizontalAlignment="Left" Margin="683,149,0,0" VerticalAlignment="Top"/>
+        <Label Content="מספר קילומטרים מתדלוק אחרון" HorizontalAlignment="Left" Margin="603,180,0,0" VerticalAlignment="Top"/>
+        <Label Content="מספר קילומטרים מטיפול אחרון" HorizontalAlignment="Left" Margin="603,228,0,0" VerticalAlignment="Top"/>
+        <Label Content="סטטוס" HorizontalAlignment="Left" Margin="708,288,0,0" VerticalAlignment="Top"/>
+        <Label Content="תאריך מטיפול אחרון" HorizontalAlignment="Left" Margin="654,346,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpDateLastTreat" HorizontalAlignment="Left" Margin="527,355,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbKilometers" HorizontalAlignment="Left" Height="23" Margin="509,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbKilometers_TextChanged"/>
+        <TextBox x:Name="tbKMgas" HorizontalAlignment="Left" Height="23" Margin="455,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbKMtreat" HorizontalAlignment="Left" Height="23" Margin="455,232,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <ComboBox Name="cbStatus" HorizontalAlignment="Left" Margin="491,292,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbStatus_SelectionChanged"/>
+        <Button x:Name="btnAddBus" Content="הוסף" HorizontalAlignment="Left" Margin="65,379,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+    </Grid>
+</Window>
