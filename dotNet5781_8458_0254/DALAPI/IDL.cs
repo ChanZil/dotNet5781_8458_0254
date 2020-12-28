@@ -7,5 +7,8 @@ namespace DALAPI
 {
     public interface IDL
     {
+        void CreateBus();
+        Bus RequestBus(); 
+
     }
 }

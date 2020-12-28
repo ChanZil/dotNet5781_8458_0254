@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DALAPI\DALAPI.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
 </Project>
