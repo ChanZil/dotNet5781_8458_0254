@@ -536,58 +536,58 @@ namespace DSd
                 new Bus
                 {
                     LicenseNum = 45382957,
-                    FromDate = new DateTime()
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    FromDate = new DateTime(2020, 1, 12),
+                    TotalTrip = 89045,
+                    FuelRemain = 34.8,
+                    Status = DOenums.BusStatus.זמין
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 90080098,
+                    FromDate = new DateTime(2019, 8, 18),
+                    TotalTrip = 54098,
+                    FuelRemain = 43.9,
+                    Status = DOenums.BusStatus.בטיפול
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 70006593,
+                    FromDate = new DateTime(2018, 6, 26),
+                    TotalTrip = 101089,
+                    FuelRemain = 11.4,
+                    Status = DOenums.BusStatus.זמין
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 24240746,
+                    FromDate = new DateTime(2017, 10, 6),
+                    TotalTrip = 109670,
+                    FuelRemain = 28.7,
+                    Status = DOenums.BusStatus.זמין
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 38602756,
+                    FromDate = new DateTime(2019, 8, 19),
+                    TotalTrip = 57892,
+                    FuelRemain = 38.2,
+                    Status = DOenums.BusStatus.זמין
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 78945665,
+                    FromDate = new DateTime(2016, 5, 15),
+                    TotalTrip = 178954,
+                    FuelRemain = 11.2,
+                    Status = DOenums.BusStatus.זמין
                 },
                 new Bus
                 {
-                    LicenseNum =
-                    FromDate =
-                    TotalTrip =
-                    FuelRemain =
-                    Status =
+                    LicenseNum = 12312300,
+                    FromDate = new DateTime(2020, 12, 29),
+                    TotalTrip = 0,
+                    FuelRemain = 50,
+                    Status = DOenums.BusStatus.זמין
                 }
 #endregion
             };
