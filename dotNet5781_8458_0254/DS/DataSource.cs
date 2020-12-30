@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using DO;
 
-namespace DSd
+namespace DS
 {
     public static class DataSource
     {
         public static List<Station> listStations; //list of stations
         public static List<Bus> listBuses; //list of buses
+        public static List<Line> listLines; //list of lines
+        public static List<LineStation> listLinesStations; //list of lines stations
         static DataSource()
         {
             InitAllLists();
@@ -588,6 +590,506 @@ namespace DSd
                     TotalTrip = 0,
                     FuelRemain = 50,
                     Status = DOenums.BusStatus.זמין
+                }
+#endregion
+            };
+            listLines = new List<Line>
+            {
+                #region InitialLinesList
+                new Line
+                {
+                 Id=1,
+                 Code=33,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=77,
+                 LastStation=78,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=2,
+                 Code=74,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=83,
+                 LastStation=86,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=3,
+                 Code=75,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=88,
+                 LastStation=83,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=4,
+                 Code=55,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=90,
+                 LastStation=94,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=5,
+                 Code=52,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=102,
+                 LastStation=97,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=6,
+                 Code=67,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=76,
+                 LastStation=73,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=7,
+                 Code=69,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=110,
+                 LastStation=115,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=8,
+                 Code=64,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=117,
+                 LastStation=1491,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=9,
+                 Code=31,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=88,
+                 LastStation=89,
+                  IsDeleted=false
+                },
+                new Line
+                {
+                 Id=10,
+                 Code=32,
+                 Area=DOenums.Areas.ירושלים,
+                 FirstStation=122,
+                 LastStation=1523,
+                  IsDeleted=false
+                }
+#endregion
+            };
+            listLinesStations = new List<LineStation>
+            {
+                #region InitialLinesStationsList
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 77,
+                    LineStationIndex = 1,
+                    PrevStation = 0,
+                    NextStation = 73
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 73,
+                    LineStationIndex = 2,
+                    PrevStation = 77,
+                    NextStation = 76
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 76,
+                    LineStationIndex = 3,
+                    PrevStation = 73,
+                    NextStation = 78
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 78,
+                    LineStationIndex = 4,
+                    PrevStation = 76,
+                    NextStation = 83
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 83,
+                    LineStationIndex = 5,
+                    PrevStation = 78,
+                    NextStation = 84
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 84,
+                    LineStationIndex = 6,
+                    PrevStation = 83,
+                    NextStation = 85
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 85,
+                    LineStationIndex = 7,
+                    PrevStation = 84,
+                    NextStation = 89
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 89,
+                    LineStationIndex = 8,
+                    PrevStation = 85,
+                    NextStation = 93
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 93,
+                    LineStationIndex = 9,
+                    PrevStation = 89,
+                    NextStation = 78
+                },
+                new LineStation
+                {
+                    LineId = 1,
+                    Station = 78,
+                    LineStationIndex = 10,
+                    PrevStation = 93,
+                    NextStation = 0
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 83,
+                    LineStationIndex = 1,
+                    PrevStation = 0,
+                    NextStation = 93
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 93,
+                    LineStationIndex = 2,
+                    PrevStation = 83,
+                    NextStation = 94
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 94,
+                    LineStationIndex = 3,
+                    PrevStation = 93,
+                    NextStation = 95
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 95,
+                    LineStationIndex = 4,
+                    PrevStation = 94,
+                    NextStation = 102
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 102,
+                    LineStationIndex = 5,
+                    PrevStation = 95,
+                    NextStation = 86
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 86,
+                    LineStationIndex = 6,
+                    PrevStation = 102,
+                    NextStation = 84
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 84,
+                    LineStationIndex = 7,
+                    PrevStation = 86,
+                    NextStation = 77
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 77,
+                    LineStationIndex = 8,
+                    PrevStation = 84,
+                    NextStation = 76
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 76,
+                    LineStationIndex = 9,
+                    PrevStation = 77,
+                    NextStation = 86
+                },
+                new LineStation
+                {
+                    LineId = 2,
+                    Station = 86,
+                    LineStationIndex = 10,
+                    PrevStation = 76,
+                    NextStation = 0
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 88,
+                    LineStationIndex = 1,
+                    PrevStation = 0,
+                    NextStation = 89
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 89,
+                    LineStationIndex = 2,
+                    PrevStation = 88,
+                    NextStation = 93
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 93,
+                    LineStationIndex = 3,
+                    PrevStation = 89,
+                    NextStation = 95
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 95,
+                    LineStationIndex = 4,
+                    PrevStation = 93,
+                    NextStation = 106
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 106,
+                    LineStationIndex = 5,
+                    PrevStation = 95,
+                    NextStation = 108
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 108,
+                    LineStationIndex = 6,
+                    PrevStation = 106,
+                    NextStation = 109
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 109,
+                    LineStationIndex = 7,
+                    PrevStation = 108,
+                    NextStation = 84
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 84,
+                    LineStationIndex = 8,
+                    PrevStation = 109,
+                    NextStation = 89
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 89,
+                    LineStationIndex = 9,
+                    PrevStation = 84,
+                    NextStation = 83
+                },
+                new LineStation
+                {
+                    LineId = 3,
+                    Station = 83,
+                    LineStationIndex = 10,
+                    PrevStation = 89,
+                    NextStation = 0
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 90,
+                    LineStationIndex = 1,
+                    PrevStation = 0,
+                    NextStation = 89
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 89,
+                    LineStationIndex = 2,
+                    PrevStation = 90,
+                    NextStation = 93
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 93,
+                    LineStationIndex = 3,
+                    PrevStation = 89,
+                    NextStation = 108
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 108,
+                    LineStationIndex = 4,
+                    PrevStation = 93,
+                    NextStation = 109
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 109,
+                    LineStationIndex = 5,
+                    PrevStation = 108,
+                    NextStation = 105
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 105,
+                    LineStationIndex = 6,
+                    PrevStation = 109,
+                    NextStation = 110
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 110,
+                    LineStationIndex = 7,
+                    PrevStation = 105,
+                    NextStation = 84
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 84,
+                    LineStationIndex = 8,
+                    PrevStation = 110,
+                    NextStation = 95
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 95,
+                    LineStationIndex = 9,
+                    PrevStation = 84,
+                    NextStation = 94
+                },
+                new LineStation
+                {
+                    LineId = 4,
+                    Station = 94,
+                    LineStationIndex = 10,
+                    PrevStation = 95,
+                    NextStation = 0
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 102,
+                    LineStationIndex = 1,
+                    PrevStation = 0,
+                    NextStation = 111
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 111,
+                    LineStationIndex = 2,
+                    PrevStation = 102,
+                    NextStation = 115
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 115,
+                    LineStationIndex = 3,
+                    PrevStation = 111,
+                    NextStation = 117
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 117,
+                    LineStationIndex = 4,
+                    PrevStation = 115,
+                    NextStation = 1486
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 1486,
+                    LineStationIndex = 5,
+                    PrevStation = 117,
+                    NextStation = 1487
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 1487,
+                    LineStationIndex = 6,
+                    PrevStation = 1486,
+                    NextStation = 1490
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 1490,
+                    LineStationIndex = 7,
+                    PrevStation = 1487,
+                    NextStation = 1511
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 1511,
+                    LineStationIndex = 8,
+                    PrevStation = 1490,
+                    NextStation = 108
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 108,
+                    LineStationIndex = 9,
+                    PrevStation = 1511,
+                    NextStation = 97
+                },
+                new LineStation
+                {
+                    LineId = 5,
+                    Station = 97,
+                    LineStationIndex = 10,
+                    PrevStation = 108,
+                    NextStation = 0
                 }
 #endregion
             };

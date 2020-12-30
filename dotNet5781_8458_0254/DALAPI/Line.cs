@@ -11,6 +11,6 @@ namespace DO
         public DOenums.Areas Area { get; set; } //the area of the bus line
         public int FirstStation { get; set; } //number of first station in the line
         public int LastStation { get; set; } //number of last station in the line
-
+        public bool IsDeleted { get; set; }
     }
 }
