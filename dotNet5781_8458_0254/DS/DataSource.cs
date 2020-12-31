@@ -10,7 +10,8 @@ namespace DS
         public static List<Station> listStations; //list of stations
         public static List<Bus> listBuses; //list of buses
         public static List<Line> listLines; //list of lines
-        public static List<LineStation> listLinesStations; //list of lines stations
+        public static List<LineStation> listLineStations; //list of lines stations
+        public static List<AdjacentStations> listAdjacentStations; //list of adjacent stations
         static DataSource()
         {
             InitAllLists();

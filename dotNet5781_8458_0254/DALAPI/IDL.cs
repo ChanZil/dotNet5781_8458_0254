@@ -8,46 +8,49 @@ namespace DALAPI
     public interface IDL
     {
         #region Bus
+        IEnumerable<DO.Bus> GetAllBuses();
+        IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> predicate);
         void CreateBus(DO.Bus bus);
         DO.Bus GetBus(int id);
         void UpdateBus(DO.Bus bus);
+        void UpdateBus(int id, Action<DO.Bus> update);
         void DeleteBus(int id);
         #endregion Bus
         #region Line
+        IEnumerable<DO.Line> GetAllLines();
+        IEnumerable<DO.Line> GetAllLinesBy(Predicate<DO.Line> predicate);
         void CreateLine(DO.Line line);
         DO.Line GetLine(int id);
         void UpdateLine(DO.Line line);
+        void UpdateLine(int id, Action<DO.Line> update);
         void DeleteLine(int id);
         #endregion Line
         #region Station
+        IEnumerable<DO.Station> GetAllStations();
+        IEnumerable<DO.Station> GetAllStationsBy(Predicate<DO.Station> predicate);
         void CreateStation(DO.Station station);
         DO.Station GetStation(int id);
         void UpdateStation(DO.Station station);
+        void UpdateStation(int id, Action<DO.Station> update);
         void DeleteStation(int id);
         #endregion Station
         #region LineStation
-        void CreateLineStation(DO.LineStation lineStation);
-        DO.LineStation GetLineStation(int id);
+        IEnumerable<DO.LineStation> GetAllLineStations();
+        IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> predicate);
+        void CreateAllLineStations(int lineId, int stationId, int index, int prev, int next);
+        DO.LineStation GetLineStation(int lineId, int stationId);
         void UpdateLineStation(DO.LineStation lineStation);
-        void DeleteLineStation(int id);
+        void UpdateLineStations(int lineId, int stationId, Action<DO.LineStation> update);
+        void DeleteLineStation(int lineId, int stationId);
         #endregion LineStation
-        #region LineTrip
-        void CreateLineTrip(DO.LineTrip lineTrip);
-        DO.LineTrip GetLineTrip(int id);
-        void UpdateLineTrip(DO.LineTrip lineTrip);
-        void DeleteLineTrip(int id);
-        #endregion LineTrip
-        #region BusOnTrip
-        void CreateBusOnTrip(DO.BusOnTrip busOnTrip);
-        DO.BusOnTrip GetBusOnTrip(int id);
-        void UpdateBusOnTrip(DO.BusOnTrip busOnTrip);
-        void DeleteBusOnTrip(int id);
-        #endregion BusOnTrip
         #region AdjacentStations
-        void CreateAdjacentStations(DO.AdjacentStations adjacentStations);
-        DO.AdjacentStations GetAdjacentStations(int id);
+        IEnumerable<DO.AdjacentStations> GetAllAdjacentStations();
+        IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> predicate);
+        void CreateAdjacentStations(int codeStation1, int codeStation2, double distance, TimeSpan time);
+        DO.AdjacentStations GetAdjacentStations(int station1, int station2);
         void UpdateAdjacentStations(DO.AdjacentStations adjacentStations);
-        void DeleteAdjacentStations(int id);
+        void UpdateAdjacentStations(int codeStation1, int codeStation2, Action<DO.AdjacentStations> update);
+        void DeleteAdjacentStations(int codeStation1, int codeStation2);
         #endregion AdjacentStations
     }
 }
