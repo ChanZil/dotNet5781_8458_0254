@@ -8,5 +8,12 @@ namespace BL
 {
     class BLImp : IBL
     {
+        IDL dl = DLFactory.GetDL();
+        #region Line
+        public IEnumerable<BO.BOLine> GetAllLines()
+        {
+
+        }
+#endregion Line
     }
 }
