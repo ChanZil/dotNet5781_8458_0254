@@ -52,5 +52,14 @@ namespace DALAPI
         void UpdateAdjacentStations(int codeStation1, int codeStation2, Action<DO.AdjacentStations> update);
         void DeleteAdjacentStations(int codeStation1, int codeStation2);
         #endregion AdjacentStations
+        #region LineTrip
+        IEnumerable<DO.LineTrip> GetAllLineTrip();
+        IEnumerable<DO.LineTrip> GetAllLineTripBy(Predicate<DO.LineTrip> predicate);
+        void CreateLineTrip(DO.LineTrip lineTrip);
+        DO.LineTrip GetLineTrip(int id);
+        void UpdateLineTrip(DO.LineTrip lineTrip);
+        void UpdateLineTrip(int id, Action<DO.LineTrip> update);
+        void DeleteLineTrip(int id);
+        #endregion LineTrip
     }
 }

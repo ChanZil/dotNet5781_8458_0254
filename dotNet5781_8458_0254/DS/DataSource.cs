@@ -12,15 +12,17 @@ namespace DS
         public static List<Line> listLines; //list of lines
         public static List<LineStation> listLineStations; //list of lines stations
         public static List<AdjacentStations> listAdjacentStations; //list of adjacent stations
+        public static List<LineTrip> listLineTrip; //list of lines trip
         static DataSource()
         {
             InitAllLists();
         }
         static void InitAllLists()
         {
+            #region InitialStationsList
+
             listStations = new List<Station>
             {
-                #region InitialStationsList
                 new Station
                 {
                     Code = 73,
@@ -427,11 +429,14 @@ namespace DS
                     Latitude = 31.79617,
                     Longitude =35.206158
                 }
-                #endregion
+                
             };
+
+            #endregion InitialStationsList
+            #region InitialBusList
+
             listBuses = new List<Bus>
             {
-                #region InitialBusesList
                 new Bus
                 {
                     LicenseNum = 12343576,
@@ -592,11 +597,13 @@ namespace DS
                     FuelRemain = 50,
                     Status = DOenums.BusStatus.זמין
                 }
-#endregion
             };
+
+            #endregion InitialBusList
+            #region InitialLinesList
+
             listLines = new List<Line>
             {
-                #region InitialLinesList
                 new Line
                 {
                  Id=1,
@@ -687,11 +694,13 @@ namespace DS
                  LastStation=1523,
                   IsDeleted=false
                 }
-#endregion
             };
-            listLinesStations = new List<LineStation>
+
+            #endregion InitialLinesList
+            #region InitialLinesStationsList
+
+            listLineStations = new List<LineStation>
             {
-                #region InitialLinesStationsList
                 new LineStation
                 {
                     LineId = 1,
@@ -1092,8 +1101,100 @@ namespace DS
                     PrevStation = 108,
                     NextStation = 0
                 }
-#endregion
             };
+
+            #endregion InitialLinesStationsList
+            #region InitialLineTrip
+
+            listLineTrip = new List<LineTrip>
+            {
+                new LineTrip
+                {
+                    LineId = 1,
+                    StartAt = new TimeSpan(7,0,0), 
+                    FinishAt = new TimeSpan(23,0,0),
+                    Frequency = new TimeSpan(0,30,0)
+                },
+                new LineTrip
+                {
+                    LineId = 2,
+                    StartAt = new TimeSpan(6,15,0),
+                    FinishAt = new TimeSpan(18,45,0),
+                    Frequency = new TimeSpan(0,30,0)
+                },
+                new LineTrip
+                {
+                    LineId = 3,
+                    StartAt = new TimeSpan(8,20,0),
+                    FinishAt = new TimeSpan(23,40,0),
+                    Frequency = new TimeSpan(0,20,0)
+                },
+                new LineTrip
+                {
+                    LineId = 4,
+                    StartAt = new TimeSpan(7,0,0),
+                    FinishAt = new TimeSpan(21,0,0),
+                    Frequency = new TimeSpan(1,0,0)
+                },
+                new LineTrip
+                {
+                    LineId = 5,
+                    StartAt = new TimeSpan(8,30,0),
+                    FinishAt = new TimeSpan(22,0,0),
+                    Frequency = new TimeSpan(0,20,0)
+                },
+                new LineTrip
+                {
+                    LineId = 6,
+                    StartAt = new TimeSpan(7,0,0),
+                    FinishAt = new TimeSpan(0,0,0),
+                    Frequency = new TimeSpan(0,15,0)
+                },
+                new LineTrip
+                {
+                    LineId = 7,
+                    StartAt = new TimeSpan(9,30,0),
+                    FinishAt = new TimeSpan(21,30,0),
+                    Frequency = new TimeSpan(1,0,0)
+                },
+                new LineTrip
+                {
+                    LineId = 8,
+                    StartAt = new TimeSpan(14,0,0),
+                    FinishAt = new TimeSpan(1,0,0),
+                    Frequency = new TimeSpan(30,0,0)
+                },
+                new LineTrip
+                {
+                    LineId = 9,
+                    StartAt = new TimeSpan(6,20,0),
+                    FinishAt = new TimeSpan(0,10,0),
+                    Frequency = new TimeSpan(0,10,0)
+                },
+                new LineTrip
+                {
+                    LineId = 10,
+                    StartAt = new TimeSpan(7,45,0),
+                    FinishAt = new TimeSpan(13,0,0),
+                    Frequency = new TimeSpan(0,15,0)
+                }
+            };
+
+            #endregion InitialLineTrip
+            #region InitialAdjacentStations
+
+            listAdjacentStations = new List<AdjacentStations>();
+            foreach (LineStation item in listLineStations)
+                if (item.NextStation != 0)
+                {
+                    AdjacentStations ads = new AdjacentStations();
+                    ads.Station1 = item.Station;
+                    ads.Station2 = item.NextStation;
+                    //calculate distance and time
+                    listAdjacentStations.Add(ads);
+                }
+
+            #endregion InitialAdjacentStations
         }
     }
 }

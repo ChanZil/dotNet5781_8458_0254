@@ -8,6 +8,5 @@ namespace DO
     {
         public static int RunIdBusOnTrip = 1;
         public static int RunIdLine = 10;
-        public static int RunIdLineTrip = 1;
     }
 }

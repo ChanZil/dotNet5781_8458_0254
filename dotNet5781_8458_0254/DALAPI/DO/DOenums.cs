@@ -8,6 +8,5 @@ namespace DO
     {
         public enum BusStatus {בנסיעה, זמין , בטיפול, בתדלוק};
         public enum Areas { צפון, דרום, מרכז, ירושלים};
-        
     }
 }

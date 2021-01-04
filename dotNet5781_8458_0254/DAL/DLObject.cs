@@ -258,5 +258,55 @@ namespace DL
                 throw new DO.BadAdjacentStationsException(codeStation1, codeStation2, $"bad adjacentStations. code station 1: {codeStation1}, code station 2: {codeStation2}");
         }
         #endregion AdjacentStations
+        #region LineTrip
+
+        public IEnumerable<DO.LineTrip> GetAllLineTrip()
+        {
+            return from lineTrip in DataSource.listLineTrip
+                   select lineTrip.Clone();
+        }
+        public IEnumerable<DO.LineTrip> GetAllLineTripBy(Predicate<DO.LineTrip> predicate)
+        {
+            throw new NotImplementedException();
+        }
+        public void CreateLineTrip(DO.LineTrip lineTrip)
+        {
+            if (DataSource.listLineTrip.FirstOrDefault(p => p.LineId == lineTrip.LineId) != null)
+                throw new DO.BadLineIdException(lineTrip.LineId, $"bad line id: {lineTrip.LineId}");
+            DataSource.listLineTrip.Add(lineTrip.Clone());
+        }
+        public DO.LineTrip GetLineTrip(int id)
+        {
+            DO.LineTrip lineTrip = DataSource.listLineTrip.Find(p => p.LineId == id);
+            if (lineTrip != null)
+                return lineTrip.Clone();
+            else
+                throw new DO.BadLineIdException(id, $"bad line id: {id}");
+        }
+        public void UpdateLineTrip(DO.LineTrip lineTrip)
+        {
+            DO.LineTrip b = DataSource.listLineTrip.Find(p => p.LineId == lineTrip.LineId);
+            if (b != null)
+            {
+                DataSource.listLineTrip.Remove(b);
+                DataSource.listLineTrip.Add(lineTrip.Clone());
+            }
+            else
+                throw new DO.BadLineIdException(lineTrip.LineId, $"bad line id: {lineTrip.LineId}");
+        }
+        public void UpdateLineTrip(int id, Action<DO.LineTrip> update)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeleteLineTrip(int id)
+        {
+            DO.LineTrip lineTrip = DataSource.listLineTrip.Find(p => p.LineId == id);
+            if (lineTrip != null)
+                DataSource.listLineTrip.Remove(lineTrip);
+            else
+                throw new DO.BadLineIdException(id, $"bad line id: {id}");
+        }
+
+        #endregion LineTrip
     }
 }
