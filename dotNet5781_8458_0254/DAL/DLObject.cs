@@ -122,7 +122,7 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void CreateLine(DO.Line line)
+        public void CreateLine(int )
         {
             line.Id = DORunNumbers.RunIdLine;
             DORunNumbers.RunIdLine++;
