@@ -12,7 +12,7 @@ namespace BLAPI
         BO.BOLine GetLine(int id);
         void CreateLine(int code,DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation);
         void UpdateLine(BO.BOLine line);
-        void DeleteLine(int id);
+        void DeleteLine(BO.BOLine bOLine);
         #endregion Line
         #region StationInLine
         IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate);

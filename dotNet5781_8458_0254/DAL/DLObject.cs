@@ -74,8 +74,9 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void CreateStation(DO.Station station)
+        public void CreateStation(int code, string name, double longitude, double latitude, string address)
         {
+            Station station = new Station { Code = code, Name = name, Longitude = longitude, Latitude = latitude, Address = address };
             if (DataSource.listStations.FirstOrDefault(p => p.Code == station.Code) != null)
                 throw new DO.BadStationIdException(station.Code, "Duplicate station ID");
             DataSource.listStations.Add(station.Clone());
@@ -122,9 +123,9 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void CreateLine(int )
+        public void CreateLine(int code, DOenums.Areas area, int firstS, int lastS)
         {
-            line.Id = DORunNumbers.RunIdLine;
+            Line line = new Line { Id = DORunNumbers.RunIdLine, Code = code, Area = area, FirstStation = firstS, LastStation = lastS };
             DORunNumbers.RunIdLine++;
             DataSource.listLines.Add(line.Clone());
         }
@@ -269,8 +270,9 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void CreateLineTrip(DO.LineTrip lineTrip)
+        public void CreateLineTrip(int code, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency)
         {
+            LineTrip lineTrip = new LineTrip { LineId = code, StartAt = startAt, FinishAt = finishAt, Frequency = frequency };
             if (DataSource.listLineTrip.FirstOrDefault(p => p.LineId == lineTrip.LineId) != null)
                 throw new DO.BadLineIdException(lineTrip.LineId, $"bad line id: {lineTrip.LineId}");
             DataSource.listLineTrip.Add(lineTrip.Clone());

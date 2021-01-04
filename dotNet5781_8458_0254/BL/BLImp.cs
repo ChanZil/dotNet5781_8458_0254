@@ -28,13 +28,19 @@ namespace BL
                   from i in dl.GetAllLineStationsBy(l => l.LineId == item.Id)
                   select new { Code =i.LineId, Name=i., };
         }
-        void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation)
+        public void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation)
         {
             BO.BOLine bl = new BO.BOLine { Code = code, Area = area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfLineStation = listOfLineStation };
-            DO.Line line=new DO.Line { }
-            dl.CreateLine()
+            dl.CreateLine(bl.Code, bl.Area, listOfLineStation.First().Code, listOfLineStation.Last().Code);
+            dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
+            //add bl to list
         }
+        public void DeleteLine(BO.BOLine bOLine)
+        {
+            var tmp = from item in bOLine.ListOfLineStation
+                      from 
 
+        }
         #endregion Line
     }
 }
