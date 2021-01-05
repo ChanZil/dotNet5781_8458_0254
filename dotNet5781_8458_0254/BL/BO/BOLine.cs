@@ -13,6 +13,6 @@ namespace BO
         public TimeSpan StartAt { get; set; } //time of start
         public TimeSpan FinishAt { get; set; } //time of finish
         public TimeSpan Frequency { get; set; } //
-        public IEnumerable<BOStationInLine> ListOfLineStation { get; set; }
+        public IEnumerable<BOStationInLine> ListOfStationInLine { get; set; }
     }
 }
