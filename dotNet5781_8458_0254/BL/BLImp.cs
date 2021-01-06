@@ -4,7 +4,6 @@ using System.Text;
 using System.Linq;
 using DALAPI;
 using BLAPI;
-
 namespace BL
 {
     class BLImp : IBL
@@ -25,8 +24,8 @@ namespace BL
                           Frequency = line2.Frequency
                       };
             var tmp1 = from item in tmp
-                  from i in dl.GetAllLineStationsBy(l => l.LineId == item.Id)
-                  select new { Code =i.LineId, Name=i., };
+                       from i in dl.GetAllLineStationsBy(l => l.LineId == item.Id)
+                       select new { Code = i.LineId, Name = i., };
         }
         public void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
         {
@@ -36,7 +35,7 @@ namespace BL
             {
                 dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
             }
-            catch(DO.BadLineIdException ex)
+            catch (DO.BadLineIdException ex)
             {
                 throw new BO.BadLineIdExeption("Bad line id", ex);
             }
@@ -45,7 +44,7 @@ namespace BL
 
         public void UpdateLine(BO.BOLine line)
         {
-            
+
         }
 
         public void DeleteLine(BO.BOLine bOLine)
@@ -59,7 +58,7 @@ namespace BL
                 dl.DeleteLine(bOLine.Id);
                 dl.DeleteLineTrip(bOLine.Id);
             }
-            catch(DO.BadLineIdException ex)
+            catch (DO.BadLineIdException ex)
             {
                 throw new BO.BadLineIdExeption("Bad line id", ex);
             }
@@ -67,13 +66,43 @@ namespace BL
         }
         #endregion Line
         #region StationInLine
+        BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
+        {
+            BO.BOStationInLine stationBO = new BO.BOStationInLine();
+            DO.Station stationDO;
+            int id = stationInLineDO.Code;
+            try
+            {
+                stationDO = dl.GetStation(id);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("bad station id", ex);
+            }
+            stationBO.Code= stationDO.Code;
+            stationBO.Name = stationDO.Name;
+            stationBO.Longitude = stationDO.Longitude;
+            stationBO.Latitude = stationDO.Latitude;
+            stationBO.Address = stationDO.Address;
+
+            return stationBO;
+        }
         public IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate)
         {
-
+            throw new NotImplementedException();
         }
+
         BO.BOStationInLine GetStationInLine(int id)
         {
-
+            try
+            {
+                DO.Station station=dl.GetStation(id);
+                return StationDoBoAdapter(station);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("bad station id", ex);
+            }
         }
         void CreateStationInLine(int code, string name, double longitude, double latitude, string address)
         {
@@ -81,22 +110,21 @@ namespace BL
             {
                 dl.CreateStation(code, name, longitude, latitude, address);
             }
-            catch(DO.BadStationIdException ex)
+            catch (DO.BadStationIdException ex)
             {
-                throw new BO.BadStationIdExeption("bad station id", ex);
+                throw new BO.BadStationIdException("bad station id", ex);
             }
         }
         void UpdateStationInLine(BO.BOStationInLine stationInLine)
         {
             try
             {
-
+                dl.UpdateStation(dl.GetStation(stationInLine.Code));
             }
-            catch()
+            catch (DO.BadStationIdException ex)
             {
-
+                throw new BO.BadStationIdException("bad station id", ex);
             }
-            dl.UpdateStation(dl.GetStation(stationInLine.Code));
         }
         public void DeleteStationInLine(BO.BOStationInLine stationInLine)
         {
@@ -106,9 +134,11 @@ namespace BL
             }
             catch (DO.BadStationIdException ex)
             {
-                throw new BO.BadStationIdExeption("bad station id", ex);
+                throw new BO.BadStationIdException("bad station id", ex);
             }
         }
         #endregion StationInLine
     }
 }
+
+
