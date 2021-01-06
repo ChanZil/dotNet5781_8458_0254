@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BLAPI;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PLLines.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PLLines : Window
     {
-        public MainWindow()
+        public PLLines()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            PLLines pLLines = new PLLines();
-            pLLines.Show();
         }
     }
 }
