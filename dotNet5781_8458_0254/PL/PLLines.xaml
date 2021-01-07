@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="PLLines" Height="450" Width="800">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="314" Margin="460,49,0,0" VerticalAlignment="Top" Width="273"/>
+        <DataGrid x:Name="dgStationInLIne" Height="327" Margin="58,43,0,0" VerticalAlignment="Top" Width="399" HorizontalAlignment="Left" FlowDirection="RightToLeft" SelectionChanged="dgStationInLIne_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="קוד תחנה" Binding ="{Binding Code}"/>
+                <DataGridTextColumn Header="שם תחנה" Binding ="{Binding Name}"/>
+                <DataGridTextColumn Header="כתובת" Binding ="{Binding Address}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListBox x:Name="lbLines" HorizontalAlignment="Left" Height="327" Margin="563,43,0,0" VerticalAlignment="Top" Width="172"/>
     </Grid>
 </Window>

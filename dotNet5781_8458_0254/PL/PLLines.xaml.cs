@@ -20,13 +20,28 @@ namespace PL
     /// </summary>
     public partial class PLLines : Window
     {
-        IBL bl = BLFactory.GetBL();
+        IBL bl = BLFactory.GetBL("1");
         public PLLines()
         {
             InitializeComponent();
+            var listOfStations = bl.GetAllStationInLine();
+            var stations = from item in listOfStations
+                           select new
+                           {
+                               Code = item.Code,
+                               Name = item.Name,
+                               Address = item.Address
+                           };
+            dgStationInLIne.ItemsSource = stations;
+            //var listOfLines = 
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void dgStationInLIne_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

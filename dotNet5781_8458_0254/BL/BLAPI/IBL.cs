@@ -7,7 +7,7 @@ namespace BLAPI
     public interface IBL
     {
         #region Line
-        //IEnumerable<BO.BOLine> GetAllBOLines();
+        IEnumerable<BO.BOLine> GetAllBOLines();
         //IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate);
         //BO.BOLine GetLine(int id);
         //void CreateLine(int code,DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation);
@@ -15,8 +15,9 @@ namespace BLAPI
         //void DeleteLine(BO.BOLine bOLine);
         #endregion Line
         #region StationInLine
+        IEnumerable<BO.BOStationInLine> GetAllStationInLine();
         //IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate);
-        //BO.BOStationInLine GetStationInLine(int id);
+        BO.BOStationInLine GetStationInLine(int id);
         //void CreateStationInLine(int code, string name, double longitude, double latitude, string address);
         //void UpdateStationInLine(BO.BOStationInLine stationInLine);
         //void DeleteStationInLine(BO.BOStationInLine stationInLine);

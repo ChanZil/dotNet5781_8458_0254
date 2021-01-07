@@ -10,108 +10,117 @@ namespace BL
     {
         IDL dl = DLFactory.GetDL();
         #region Line
-        ////public IEnumerable<BO.BOLine> GetAllBOLines()
-        ////{
-        ////    var tmp = from line1 in dl.GetAllLines()
-        ////              from line2 in dl.GetAllLineTripBy(l => l.LineId == line1.Id)
-        ////              select new
-        ////              {
-        ////                  Id = line1.Id,
-        ////                  Code = line1.Code,
-        ////                  Area = line1.Area,
-        ////                  StartAt = line2.StartAt,
-        ////                  FinishAt = line2.FinishAt,
-        ////                  Frequency = line2.Frequency
-        ////              };
-        ////    var tmp1 = from item in tmp
-        ////               from i in dl.GetAllLineStationsBy(l => l.LineId == item.Id)
-        ////               select new { Code = i.LineId, Name = i., };
-        ////}
-        ////public IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate)
-        ////{
+        public IEnumerable<BO.BOLine> GetAllBOLines()
+        {
+            IEnumerable<BO.BOLine> tmp = from line1 in dl.GetAllLines()
+                                         from line2 in dl.GetAllLineTripBy(l => l.LineId == line1.Id)
+                                         select new BO.BOLine
+                                         {
+                                             Id = line1.Id,
+                                             Code = line1.Code,
+                                             Area = line1.Area,
+                                             StartAt = line2.StartAt,
+                                             FinishAt = line2.FinishAt,
+                                             Frequency = line2.Frequency,
+                                         };
 
-        ////}
-        ////public BO.BOLine GetLine(int id)
-        ////{
-
-        ////}
-        //public void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
-        //{
-        //    //BO.BOLine bl = new BO.BOLine { Code = code, Area = area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfStationInLine = listOfStationInLine };
-        //    //dl.CreateLine(bl.Code, bl.Area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
-        //    //try
-        //    //{
-        //    //    dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
-        //    //}
-        //    //catch (DO.BadLineIdException ex)
-        //    //{
-        //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
-        //    //}
-        //    ////add bl to list
-        //}
-
-        //public void UpdateLine(BO.BOLine line)
+            var tmp1 = from item1 in tmp
+                       from item2 in item1.ListOfStationInLine
+                       from item3 in dl.GetAllLineStationsBy(l => l.LineId == item1.Id)
+                       select item3;
+            return tmp1;
+                       
+        }
+        //public IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate)
         //{
 
-        //}
+            ////}
+            ////public BO.BOLine GetLine(int id)
+            ////{
 
-        //public void DeleteLine(BO.BOLine bOLine)
-        //{
-        //    //foreach (BO.BOStationInLine item in bOLine.ListOfStationInLine)
-        //    //{
-        //    //    DeleteStationInLine(item); //delete adStation linestation
-        //    //}
-        //    //try
-        //    //{
-        //    //    dl.DeleteLine(bOLine.Id);
-        //    //    dl.DeleteLineTrip(bOLine.Id);
-        //    //}
-        //    //catch (DO.BadLineIdException ex)
-        //    //{
-        //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
-        //    //}
-        //    ////remove from list
-        //}
-        #endregion Line
-        #region StationInLine
-        //BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
-        //{
-        //    BO.BOStationInLine stationBO = new BO.BOStationInLine();
-        //    DO.Station stationDO;
-        //    int id = stationInLineDO.Code;
-        //    try
-        //    {
-        //        stationDO = dl.GetStation(id);
-        //    }
-        //    catch (DO.BadStationIdException ex)
-        //    {
-        //        throw new BO.BadStationIdException("bad station id", ex);
-        //    }
-        //    stationBO.Code= stationDO.Code;
-        //    stationBO.Name = stationDO.Name;
-        //    stationBO.Longitude = stationDO.Longitude;
-        //    stationBO.Latitude = stationDO.Latitude;
-        //    stationBO.Address = stationDO.Address;
+            ////}
+            //public void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
+            //{
+            //    //BO.BOLine bl = new BO.BOLine { Code = code, Area = area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfStationInLine = listOfStationInLine };
+            //    //dl.CreateLine(bl.Code, bl.Area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
+            //    //try
+            //    //{
+            //    //    dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
+            //    //}
+            //    //catch (DO.BadLineIdException ex)
+            //    //{
+            //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
+            //    //}
+            //    ////add bl to list
+            //}
 
-        //    return stationBO;
-        //}
+            //public void UpdateLine(BO.BOLine line)
+            //{
+
+            //}
+
+            //public void DeleteLine(BO.BOLine bOLine)
+            //{
+            //    //foreach (BO.BOStationInLine item in bOLine.ListOfStationInLine)
+            //    //{
+            //    //    DeleteStationInLine(item); //delete adStation linestation
+            //    //}
+            //    //try
+            //    //{
+            //    //    dl.DeleteLine(bOLine.Id);
+            //    //    dl.DeleteLineTrip(bOLine.Id);
+            //    //}
+            //    //catch (DO.BadLineIdException ex)
+            //    //{
+            //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
+            //    //}
+            //    ////remove from list
+            //}
+            #endregion Line
+            #region StationInLine
+            BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
+        {
+            BO.BOStationInLine stationBO = new BO.BOStationInLine();
+            DO.Station stationDO;
+            int id = stationInLineDO.Code;
+            try
+            {
+                stationDO = dl.GetStation(id);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("bad station id", ex);
+            }
+            stationBO.Code = stationDO.Code;
+            stationBO.Name = stationDO.Name;
+            stationBO.Longitude = stationDO.Longitude;
+            stationBO.Latitude = stationDO.Latitude;
+            stationBO.Address = stationDO.Address;
+            return stationBO;
+        }
+        public IEnumerable<BO.BOStationInLine> GetAllStationInLine()
+        {
+            var listOfStations = dl.GetAllStations();
+            return from item in listOfStations
+                   select StationDoBoAdapter(item);
+        }
         //public IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate)
         //{
         //    //throw new NotImplementedException();
         //}
 
-        //public BO.BOStationInLine GetStationInLine(int id)
-        //{
-        //    try
-        //    {
-        //        DO.Station station=dl.GetStation(id);
-        //        return StationDoBoAdapter(station);
-        //    }
-        //    catch (DO.BadStationIdException ex)
-        //    {
-        //        throw new BO.BadStationIdException("bad station id", ex);
-        //    }
-        //}
+        public BO.BOStationInLine GetStationInLine(int id)
+        {
+            try
+            {
+                DO.Station station = dl.GetStation(id);
+                return StationDoBoAdapter(station);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("bad station id", ex);
+            }
+        }
         //public void CreateStationInLine(int code, string name, double longitude, double latitude, string address)
         //{
         //    try

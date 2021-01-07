@@ -7,9 +7,17 @@ namespace BLAPI
 {
     public static class BLFactory
     {
-        public static IBL GetBL()
+        public static IBL GetBL(string type)
         {
-            return new BLImp();
+            switch (type)
+            {
+                case "1":
+                    return new BLImp();
+                case "2":
+                //return new BLImp2();
+                default:
+                    return new BLImp();
+            }
         }
     }
 }
