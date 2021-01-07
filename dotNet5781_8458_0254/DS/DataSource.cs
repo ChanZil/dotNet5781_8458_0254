@@ -601,7 +601,6 @@ namespace DS
 
             #endregion InitialBusList
             #region InitialLinesList
-
             listLines = new List<Line>
             {
                 new Line
@@ -610,8 +609,7 @@ namespace DS
                  Code=33,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=77,
-                 LastStation=78,
-                  IsDeleted=false
+                 LastStation=78
                 },
                 new Line
                 {
@@ -619,8 +617,7 @@ namespace DS
                  Code=74,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=83,
-                 LastStation=86,
-                  IsDeleted=false
+                 LastStation=86
                 },
                 new Line
                 {
@@ -628,8 +625,7 @@ namespace DS
                  Code=75,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=88,
-                 LastStation=83,
-                  IsDeleted=false
+                 LastStation=83
                 },
                 new Line
                 {
@@ -637,8 +633,7 @@ namespace DS
                  Code=55,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=90,
-                 LastStation=94,
-                  IsDeleted=false
+                 LastStation=94
                 },
                 new Line
                 {
@@ -646,8 +641,7 @@ namespace DS
                  Code=52,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=102,
-                 LastStation=97,
-                  IsDeleted=false
+                 LastStation=97
                 },
                 new Line
                 {
@@ -655,8 +649,7 @@ namespace DS
                  Code=67,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=76,
-                 LastStation=73,
-                  IsDeleted=false
+                 LastStation=73
                 },
                 new Line
                 {
@@ -664,8 +657,7 @@ namespace DS
                  Code=69,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=110,
-                 LastStation=115,
-                  IsDeleted=false
+                 LastStation=115
                 },
                 new Line
                 {
@@ -673,8 +665,7 @@ namespace DS
                  Code=64,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=117,
-                 LastStation=1491,
-                  IsDeleted=false
+                 LastStation=1491
                 },
                 new Line
                 {
@@ -682,8 +673,7 @@ namespace DS
                  Code=31,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=88,
-                 LastStation=89,
-                  IsDeleted=false
+                 LastStation=89
                 },
                 new Line
                 {
@@ -691,8 +681,7 @@ namespace DS
                  Code=32,
                  Area=DOenums.Areas.ירושלים,
                  FirstStation=122,
-                 LastStation=1523,
-                  IsDeleted=false
+                 LastStation=1523
                 }
             };
 

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
 
 namespace PL
 {
@@ -19,9 +20,15 @@ namespace PL
     /// </summary>
     public partial class PLLines : Window
     {
+        IBL bl = BLFactory.GetBL();
         public PLLines()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

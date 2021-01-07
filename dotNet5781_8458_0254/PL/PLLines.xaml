@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="PLLines" Height="450" Width="800">
     <Grid>
-        
+        <ListBox HorizontalAlignment="Left" Height="314" Margin="460,49,0,0" VerticalAlignment="Top" Width="273"/>
     </Grid>
 </Window>

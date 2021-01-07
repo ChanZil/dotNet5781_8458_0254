@@ -7,7 +7,7 @@ namespace BLAPI
 {
     public static class BLFactory
     {
-        public static IBL GetBL(string type)
+        public static IBL GetBL()
         {
             return new BLImp();
         }
