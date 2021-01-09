@@ -19,7 +19,7 @@ namespace DALAPI
         #region Line
         IEnumerable<DO.Line> GetAllLines();
         IEnumerable<DO.Line> GetAllLinesBy(Predicate<DO.Line> predicate);
-        void CreateLine(int code, DOenums.Areas area, int firstS, int lastS);
+        void CreateLine(int code, Areas area, int firstS, int lastS);
         DO.Line GetLine(int id);
         void UpdateLine(DO.Line line);
         void UpdateLine(int id, Action<DO.Line> update);

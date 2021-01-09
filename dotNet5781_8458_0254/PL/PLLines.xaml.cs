@@ -33,7 +33,19 @@ namespace PL
                                Address = item.Address
                            };
             dgStationInLIne.ItemsSource = stations;
-            //var listOfLines = 
+            var listOfLine = bl.GetAllBOLines();
+            var lines = from item in listOfLine
+                           select new
+                           {
+                              Id=item.Id,
+                              Code=item.Code,
+                              Area= item.Area,
+                              StartAt=item.StartAt,
+                              FinishAt=item.FinishAt,
+                              Frequency=item.Frequency,
+                              ListOfStationInLine=item.ListOfStationInLine
+                           };
+            lbLines.ItemsSource = lines;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -42,6 +54,11 @@ namespace PL
         }
 
         private void dgStationInLIne_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lbLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

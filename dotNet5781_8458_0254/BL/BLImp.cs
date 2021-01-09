@@ -12,73 +12,60 @@ namespace BL
         #region Line
         public IEnumerable<BO.BOLine> GetAllBOLines()
         {
-            IEnumerable<BO.BOLine> tmp = from line1 in dl.GetAllLines()
-                                         from line2 in dl.GetAllLineTripBy(l => l.LineId == line1.Id)
-                                         select new BO.BOLine
-                                         {
-                                             Id = line1.Id,
-                                             Code = line1.Code,
-                                             Area = line1.Area,
-                                             StartAt = line2.StartAt,
-                                             FinishAt = line2.FinishAt,
-                                             Frequency = line2.Frequency,
-                                         };
-
-            var tmp1 = from item1 in tmp
-                       from item2 in item1.ListOfStationInLine
-                       from item3 in dl.GetAllLineStationsBy(l => l.LineId == item1.Id)
-                       select item3;
-            return tmp1;
-                       
+            return from item in dl.GetAllLines()
+                    select GetLine(item.Id);
         }
         //public IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate)
         //{
 
-            ////}
-            ////public BO.BOLine GetLine(int id)
-            ////{
+        ////}
+        public BO.BOLine GetLine(int id)
+        {
+            DO.Line line = dl.GetLine(id);
+            DO.LineTrip lineTrip = dl.GetLineTrip(id);
+            IEnumerable<BO.BOStationInLine> stationList = GetAllStationInLineBy(l => l.Code == id);
+            BO.BOLine boline = new BO.BOLine { Id = line.Id, Code = line.Code, Area = (BO.Areas)line.Area, StartAt = lineTrip.StartAt, FinishAt = lineTrip.FinishAt, Frequency = lineTrip.Frequency, ListOfStationInLine = stationList };
+            return boline;
+        }
+        public void CreateLine(int code, DO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
+        {
+            BO.BOLine bl = new BO.BOLine { Code = code, Area =(BO.Areas) area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfStationInLine = listOfStationInLine };
+            dl.CreateLine(bl.Code, area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
+            try
+            {
+                dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
+            }
+            catch (DO.BadLineIdException ex)
+            {
+                throw new BO.BadLineIdExeption("Bad line id", ex);
+            }
+        }
 
-            ////}
-            //public void CreateLine(int code, DO.DOenums.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
-            //{
-            //    //BO.BOLine bl = new BO.BOLine { Code = code, Area = area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfStationInLine = listOfStationInLine };
-            //    //dl.CreateLine(bl.Code, bl.Area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
-            //    //try
-            //    //{
-            //    //    dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
-            //    //}
-            //    //catch (DO.BadLineIdException ex)
-            //    //{
-            //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
-            //    //}
-            //    ////add bl to list
-            //}
+        //public void UpdateLine(BO.BOLine line)
+        //{
 
-            //public void UpdateLine(BO.BOLine line)
-            //{
+        //}
 
-            //}
-
-            //public void DeleteLine(BO.BOLine bOLine)
-            //{
-            //    //foreach (BO.BOStationInLine item in bOLine.ListOfStationInLine)
-            //    //{
-            //    //    DeleteStationInLine(item); //delete adStation linestation
-            //    //}
-            //    //try
-            //    //{
-            //    //    dl.DeleteLine(bOLine.Id);
-            //    //    dl.DeleteLineTrip(bOLine.Id);
-            //    //}
-            //    //catch (DO.BadLineIdException ex)
-            //    //{
-            //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
-            //    //}
-            //    ////remove from list
-            //}
-            #endregion Line
-            #region StationInLine
-            BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
+        //public void DeleteLine(BO.BOLine bOLine)
+        //{
+        //    //foreach (BO.BOStationInLine item in bOLine.ListOfStationInLine)
+        //    //{
+        //    //    DeleteStationInLine(item); //delete adStation linestation
+        //    //}
+        //    //try
+        //    //{
+        //    //    dl.DeleteLine(bOLine.Id);
+        //    //    dl.DeleteLineTrip(bOLine.Id);
+        //    //}
+        //    //catch (DO.BadLineIdException ex)
+        //    //{
+        //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
+        //    //}
+        //    ////remove from list
+        //}
+        #endregion Line
+        #region StationInLine
+        BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
         {
             BO.BOStationInLine stationBO = new BO.BOStationInLine();
             DO.Station stationDO;
@@ -104,10 +91,10 @@ namespace BL
             return from item in listOfStations
                    select StationDoBoAdapter(item);
         }
-        //public IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate)
-        //{
-        //    //throw new NotImplementedException();
-        //}
+        public IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate)
+        {
+            throw new NotImplementedException();
+        }
 
         public BO.BOStationInLine GetStationInLine(int id)
         {

@@ -123,7 +123,7 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void CreateLine(int code, DOenums.Areas area, int firstS, int lastS)
+        public void CreateLine(int code, Areas area, int firstS, int lastS)
         {
             Line line = new Line { Id = DORunNumbers.RunIdLine, Code = code, Area = area, FirstStation = firstS, LastStation = lastS };
             DORunNumbers.RunIdLine++;
