@@ -43,12 +43,12 @@
   <ItemGroup>
     <Compile Include="BLAPI\BLFactory.cs" />
     <Compile Include="BLImp.cs" />
+    <Compile Include="BO\BOenums.cs" />
     <Compile Include="BO\BOExceptions.cs" />
     <Compile Include="BO\BOLine.cs" />
     <Compile Include="BO\BOLineStation.cs" />
     <Compile Include="BO\BOStation.cs" />
     <Compile Include="BO\BOStationInLine.cs" />
-    <Compile Include="BO\BOenums.cs" />
     <Compile Include="BLAPI\IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
