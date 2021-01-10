@@ -8,9 +8,9 @@ namespace BLAPI
     {
         #region Line
         IEnumerable<BO.BOLine> GetAllBOLines();
-       // IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate);
+        // IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate);
         BO.BOLine GetLine(int id);
-        void CreateLine(int code,DO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation);
+        void CreateLine(int code, DO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfLineStation);
         //void UpdateLine(BO.BOLine line);
         //void DeleteLine(BO.BOLine bOLine);
         #endregion Line
