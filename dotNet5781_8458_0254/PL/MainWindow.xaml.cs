@@ -28,7 +28,8 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            LinesWindow linesWindow = new LinesWindow();
+            linesWindow.Show();
         }
     }
 }
