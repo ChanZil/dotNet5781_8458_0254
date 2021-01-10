@@ -28,8 +28,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PLLines pLLines = new PLLines();
-            pLLines.Show();
+            
         }
     }
 }

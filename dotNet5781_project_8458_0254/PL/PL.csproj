@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79ADAA97-D71F-4FAF-A0F4-521DAE97CC02}</ProjectGuid>
+    <ProjectGuid>{39CAC747-D288-4E66-8DC1-828A4CEFC1F8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>PL</RootNamespace>
     <AssemblyName>PL</AssemblyName>
@@ -69,15 +69,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PLLines.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PLLines.xaml.cs">
-      <DependentUpon>PLLines.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PO\POLines.cs" />
     <Compile Include="PO\POStationInLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
