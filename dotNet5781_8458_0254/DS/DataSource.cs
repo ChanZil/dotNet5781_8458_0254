@@ -429,7 +429,7 @@ namespace DS
                     Latitude = 31.79617,
                     Longitude =35.206158
                 }
-                
+
             };
 
             #endregion InitialStationsList
@@ -443,7 +443,7 @@ namespace DS
                     FromDate = new DateTime(2018, 7, 8),
                     TotalTrip = 100000,
                     FuelRemain = 80.2,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -451,7 +451,7 @@ namespace DS
                     FromDate = new DateTime(2020, 10, 22),
                     TotalTrip = 10000,
                     FuelRemain = 50.3,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -459,7 +459,7 @@ namespace DS
                     FromDate = new DateTime(2015, 12, 1),
                     TotalTrip = 120000,
                     FuelRemain = 23.5,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -467,7 +467,7 @@ namespace DS
                     FromDate = new DateTime(2019, 11, 3),
                     TotalTrip = 15000,
                     FuelRemain = 45.9,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -475,7 +475,7 @@ namespace DS
                     FromDate = new DateTime(2010, 10, 16),
                     TotalTrip = 200540,
                     FuelRemain = 10,
-                    Status = DOenums.BusStatus.בתדלוק
+                    Status = BusStatus.בתדלוק
                 },
                 new Bus
                 {
@@ -483,7 +483,7 @@ namespace DS
                     FromDate = new DateTime(2013, 7, 27),
                     TotalTrip = 151234,
                     FuelRemain = 67,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -491,7 +491,7 @@ namespace DS
                     FromDate = new DateTime(2020, 4, 14),
                     TotalTrip = 4567,
                     FuelRemain = 22.6,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -499,7 +499,7 @@ namespace DS
                     FromDate = new DateTime(2018, 3, 14),
                     TotalTrip = 40980,
                     FuelRemain = 0,
-                    Status = DOenums.BusStatus.בתדלוק
+                    Status = BusStatus.בתדלוק
                 },
                 new Bus
                 {
@@ -507,7 +507,7 @@ namespace DS
                     FromDate = new DateTime(2019, 5, 17),
                     TotalTrip = 20003,
                     FuelRemain = 50,
-                    Status = DOenums.BusStatus.בנסיעה
+                    Status = BusStatus.בנסיעה
                 },
                 new Bus
                 {
@@ -515,7 +515,7 @@ namespace DS
                     FromDate = new DateTime(2016, 4, 19),
                     TotalTrip = 80450,
                     FuelRemain = 27.6,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -523,7 +523,7 @@ namespace DS
                     FromDate = new DateTime(1999, 12, 17),
                     TotalTrip = 300000,
                     FuelRemain = 0,
-                    Status = DOenums.BusStatus.בטיפול
+                    Status = BusStatus.בטיפול
                 },
                 new Bus
                 {
@@ -531,7 +531,7 @@ namespace DS
                     FromDate = new DateTime(2019, 11, 18),
                     TotalTrip = 15330,
                     FuelRemain = 39.6,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -539,7 +539,7 @@ namespace DS
                     FromDate = new DateTime(2020, 9, 28),
                     TotalTrip = 2500,
                     FuelRemain = 17.8,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -547,7 +547,7 @@ namespace DS
                     FromDate = new DateTime(2020, 1, 12),
                     TotalTrip = 89045,
                     FuelRemain = 34.8,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -555,7 +555,7 @@ namespace DS
                     FromDate = new DateTime(2019, 8, 18),
                     TotalTrip = 54098,
                     FuelRemain = 43.9,
-                    Status = DOenums.BusStatus.בטיפול
+                    Status = BusStatus.בטיפול
                 },
                 new Bus
                 {
@@ -563,7 +563,7 @@ namespace DS
                     FromDate = new DateTime(2018, 6, 26),
                     TotalTrip = 101089,
                     FuelRemain = 11.4,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -571,7 +571,7 @@ namespace DS
                     FromDate = new DateTime(2017, 10, 6),
                     TotalTrip = 109670,
                     FuelRemain = 28.7,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -579,7 +579,7 @@ namespace DS
                     FromDate = new DateTime(2019, 8, 19),
                     TotalTrip = 57892,
                     FuelRemain = 38.2,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -587,7 +587,7 @@ namespace DS
                     FromDate = new DateTime(2016, 5, 15),
                     TotalTrip = 178954,
                     FuelRemain = 11.2,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 },
                 new Bus
                 {
@@ -595,104 +595,93 @@ namespace DS
                     FromDate = new DateTime(2020, 12, 29),
                     TotalTrip = 0,
                     FuelRemain = 50,
-                    Status = DOenums.BusStatus.זמין
+                    Status = BusStatus.זמין
                 }
             };
 
             #endregion InitialBusList
             #region InitialLinesList
-
             listLines = new List<Line>
             {
                 new Line
                 {
                  Id=1,
                  Code=33,
-                 Area=DOenums.Areas.ירושלים,
+                 Area= Areas.ירושלים,
                  FirstStation=77,
-                 LastStation=78,
-                  IsDeleted=false
+                 LastStation=78
                 },
                 new Line
                 {
                  Id=2,
                  Code=74,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=83,
-                 LastStation=86,
-                  IsDeleted=false
+                 LastStation=86
                 },
                 new Line
                 {
                  Id=3,
                  Code=75,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=88,
-                 LastStation=83,
-                  IsDeleted=false
+                 LastStation=83
                 },
                 new Line
                 {
                  Id=4,
                  Code=55,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=90,
-                 LastStation=94,
-                  IsDeleted=false
+                 LastStation=94
                 },
                 new Line
                 {
                  Id=5,
                  Code=52,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=102,
-                 LastStation=97,
-                  IsDeleted=false
+                 LastStation=97
                 },
                 new Line
                 {
                  Id=6,
                  Code=67,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=76,
-                 LastStation=73,
-                  IsDeleted=false
+                 LastStation=73
                 },
                 new Line
                 {
                  Id=7,
                  Code=69,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=110,
-                 LastStation=115,
-                  IsDeleted=false
+                 LastStation=115
                 },
                 new Line
                 {
                  Id=8,
                  Code=64,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=117,
-                 LastStation=1491,
-                  IsDeleted=false
+                 LastStation=1491
                 },
                 new Line
                 {
                  Id=9,
                  Code=31,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=88,
-                 LastStation=89,
-                  IsDeleted=false
+                 LastStation=89
                 },
                 new Line
                 {
                  Id=10,
                  Code=32,
-                 Area=DOenums.Areas.ירושלים,
+                 Area=Areas.ירושלים,
                  FirstStation=122,
-                 LastStation=1523,
-                  IsDeleted=false
+                 LastStation=1523
                 }
             };
 
@@ -1111,7 +1100,7 @@ namespace DS
                 new LineTrip
                 {
                     LineId = 1,
-                    StartAt = new TimeSpan(7,0,0), 
+                    StartAt = new TimeSpan(7,0,0),
                     FinishAt = new TimeSpan(23,0,0),
                     Frequency = new TimeSpan(0,30,0)
                 },

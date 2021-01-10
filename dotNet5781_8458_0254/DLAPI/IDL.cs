@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DO;
 
-namespace DALAPI
+namespace DLAPI
 {
     public interface IDL
     {
@@ -19,7 +19,7 @@ namespace DALAPI
         #region Line
         IEnumerable<DO.Line> GetAllLines();
         IEnumerable<DO.Line> GetAllLinesBy(Predicate<DO.Line> predicate);
-        void CreateLine(DO.Line line);
+        void CreateLine(int code, Areas area, int firstS, int lastS);
         DO.Line GetLine(int id);
         void UpdateLine(DO.Line line);
         void UpdateLine(int id, Action<DO.Line> update);
@@ -28,7 +28,7 @@ namespace DALAPI
         #region Station
         IEnumerable<DO.Station> GetAllStations();
         IEnumerable<DO.Station> GetAllStationsBy(Predicate<DO.Station> predicate);
-        void CreateStation(DO.Station station);
+        void CreateStation(int code, string name, double longitude, double latitude, string address);
         DO.Station GetStation(int id);
         void UpdateStation(DO.Station station);
         void UpdateStation(int id, Action<DO.Station> update);
@@ -55,7 +55,7 @@ namespace DALAPI
         #region LineTrip
         IEnumerable<DO.LineTrip> GetAllLineTrip();
         IEnumerable<DO.LineTrip> GetAllLineTripBy(Predicate<DO.LineTrip> predicate);
-        void CreateLineTrip(DO.LineTrip lineTrip);
+        void CreateLineTrip(int code, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency);
         DO.LineTrip GetLineTrip(int id);
         void UpdateLineTrip(DO.LineTrip lineTrip);
         void UpdateLineTrip(int id, Action<DO.LineTrip> update);

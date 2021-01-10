@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{506F6C70-E777-4BB3-BEA6-59F142AD9982}</ProjectGuid>
+    <ProjectGuid>{D0655892-78E0-4A90-8409-F537B611E97A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>DLObject</RootNamespace>
+    <AssemblyName>DLObject</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,21 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLAPI\BLFactory.cs" />
-    <Compile Include="BLImp.cs" />
-    <Compile Include="BO\BOExceptions.cs" />
-    <Compile Include="BO\BOLine.cs" />
-    <Compile Include="BO\BOLineStation.cs" />
-    <Compile Include="BO\BOStation.cs" />
-    <Compile Include="BO\BOStationInLine.cs" />
-    <Compile Include="BO\BOenums.cs" />
-    <Compile Include="BLAPI\IBL.cs" />
+    <Compile Include="Cloning.cs" />
+    <Compile Include="DLObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DLAPI\DLAPI.csproj">
       <Project>{7ab879f4-8281-42d1-b202-5f6b67737ded}</Project>
       <Name>DLAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DS\DS.csproj">
+      <Project>{dfa7681b-ed68-4b30-af1e-1d40c38d5f62}</Project>
+      <Name>DS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

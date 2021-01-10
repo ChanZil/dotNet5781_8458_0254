@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{506F6C70-E777-4BB3-BEA6-59F142AD9982}</ProjectGuid>
+    <ProjectGuid>{7AB879F4-8281-42D1-B202-5F6B67737DED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>DLAPI</RootNamespace>
+    <AssemblyName>DLAPI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,22 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLAPI\BLFactory.cs" />
-    <Compile Include="BLImp.cs" />
-    <Compile Include="BO\BOExceptions.cs" />
-    <Compile Include="BO\BOLine.cs" />
-    <Compile Include="BO\BOLineStation.cs" />
-    <Compile Include="BO\BOStation.cs" />
-    <Compile Include="BO\BOStationInLine.cs" />
-    <Compile Include="BO\BOenums.cs" />
-    <Compile Include="BLAPI\IBL.cs" />
+    <Compile Include="DLConfig.cs" />
+    <Compile Include="DLFactory.cs" />
+    <Compile Include="DO\DOExceptions.cs" />
+    <Compile Include="DO\DOenums.cs" />
+    <Compile Include="DO\BusOnTrip.cs" />
+    <Compile Include="DO\Bus.cs" />
+    <Compile Include="DO\AdjacentStations.cs" />
+    <Compile Include="DO\DORunNumbers.cs" />
+    <Compile Include="DO\Line.cs" />
+    <Compile Include="DO\LineStation.cs" />
+    <Compile Include="DO\LineTrip.cs" />
+    <Compile Include="IDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DO\Station.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DLAPI\DLAPI.csproj">
-      <Project>{7ab879f4-8281-42d1-b202-5f6b67737ded}</Project>
-      <Name>DLAPI</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

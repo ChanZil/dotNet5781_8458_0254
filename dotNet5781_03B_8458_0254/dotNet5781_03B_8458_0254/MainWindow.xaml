@@ -16,6 +16,10 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="61*"/>
+        </Grid.ColumnDefinitions>
         <ListBox Name="lbBuses" HorizontalAlignment="Left" Height="353" Margin="34,38,0,0" VerticalAlignment="Top" Width="329" SelectionChanged="lbBuses_SelectionChanged" ItemTemplate="{StaticResource myDataTemplate}" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" MouseDoubleClick="lbBuses_MouseDoubleClick"/>
         <Button Name="btnAddBus" Content="הוסף אוטובוס" HorizontalAlignment="Left" Margin="410,56,0,0" VerticalAlignment="Top" Width="75" Click="btnAddBus_Click"/>
     </Grid>

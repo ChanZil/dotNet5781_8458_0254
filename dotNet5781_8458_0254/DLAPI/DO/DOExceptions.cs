@@ -51,10 +51,10 @@ namespace DO
     public class BadAdjacentStationsException : Exception
     {
         public int c1, c2;
-        public BadAdjacentStationsException(int i, int j) : base() 
+        public BadAdjacentStationsException(int i, int j) : base()
         { c1 = i; c2 = j; }
         public BadAdjacentStationsException(int i, int j, string message) :
-            base(message) 
+            base(message)
         { c1 = i; c2 = j; }
         public BadAdjacentStationsException(int i, int j, string message, Exception innerException) :
             base(message, innerException)
