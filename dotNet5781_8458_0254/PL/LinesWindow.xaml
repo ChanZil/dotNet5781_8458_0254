@@ -7,18 +7,18 @@
         mc:Ignorable="d"
         Title="LinesWindow" Height="450" Width="800">
     <Grid Margin="0,0,-8,2">
-        <DataGrid x:Name="dgStationInLIne" Height="327" Margin="58,43,0,0" VerticalAlignment="Top" Width="240" HorizontalAlignment="Left" FlowDirection="RightToLeft" SelectionChanged="dgStationInLIne_SelectionChanged">
+        <DataGrid x:Name="dgStationInLIne" Height="303" Margin="347,43,0,0" VerticalAlignment="Top" Width="240" HorizontalAlignment="Left" FlowDirection="RightToLeft" SelectionChanged="dgStationInLIne_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="קוד תחנה" Binding ="{Binding Code}"/>
                 <DataGridTextColumn Header="שם תחנה" Binding ="{Binding Name}"/>
                 <DataGridTextColumn Header="כתובת" Binding ="{Binding Address}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox x:Name="lbLines" HorizontalAlignment="Left" Height="327" Margin="320,46,0,0" VerticalAlignment="Top" Width="172" SelectionChanged="lbLines_SelectionChanged"/>
-        <Button x:Name="btnAddLine" Content="הוספה" HorizontalAlignment="Left" Margin="681,43,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnUpdateLine" Content="עדכון" HorizontalAlignment="Left" Margin="681,68,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnDeleteLine" Content="מחיקה" HorizontalAlignment="Left" Margin="681,93,0,0" VerticalAlignment="Top" Width="75"/>
-        <Grid HorizontalAlignment="Left" Height="240" Margin="513,130,0,0" VerticalAlignment="Top" Width="267">
+        <ListBox x:Name="lbLines" HorizontalAlignment="Left" Height="303" Margin="603,43,0,0" VerticalAlignment="Top" Width="172" SelectionChanged="lbLines_SelectionChanged"/>
+        <Button x:Name="btnAddLine" Content="הוספה" HorizontalAlignment="Left" Margin="700,361,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnUpdateLine" Content="עדכון" HorizontalAlignment="Left" Margin="700,387,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnDeleteLine" Content="מחיקה" HorizontalAlignment="Left" Margin="603,361,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid HorizontalAlignment="Left" Height="240" Margin="62,43,0,0" VerticalAlignment="Top" Width="267">
             <Label x:Name="lblCode" Content="קוד" HorizontalAlignment="Left" Margin="230,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.469,1.115"/>
             <TextBox x:Name="txbCode" HorizontalAlignment="Left" Height="23" Margin="40,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="40,42,0,0"/>

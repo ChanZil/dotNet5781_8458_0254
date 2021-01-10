@@ -24,8 +24,12 @@ namespace BL
         {
             DO.Line line = dl.GetLine(id);
             DO.LineTrip lineTrip = dl.GetLineTrip(id);
-            IEnumerable<BO.BOStationInLine> stationList = GetAllStationInLineBy(l => l.Code == id);
-            BO.BOLine boline = new BO.BOLine { Id = line.Id, Code = line.Code, Area = (BO.Areas)line.Area, StartAt = lineTrip.StartAt, FinishAt = lineTrip.FinishAt, Frequency = lineTrip.Frequency, ListOfStationInLine = stationList };
+            IEnumerable<DO.LineStation> lineStations = dl.GetAllLineStationsBy(l => l.LineId == id); //a collection of all lineStations of the recieved line id from DL
+            IEnumerable<DO.Station> DOstations = from lineStation in lineStations //a collection of all stations from DL, according the collection of the lineStations
+                                                 select dl.GetStation(lineStation.Station);
+            IEnumerable<BO.BOStationInLine> BOstations = from station in DOstations //convert the collection of the DOstations to BOStationInLine
+                                                 select StationDoBoAdapter(station);
+            BO.BOLine boline = new BO.BOLine { Id = line.Id, Code = line.Code, Area = (BO.Areas)line.Area, StartAt = lineTrip.StartAt, FinishAt = lineTrip.FinishAt, Frequency = lineTrip.Frequency, ListOfStationInLine = BOstations };
             return boline;
         }
         public void CreateLine(int code, DO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
