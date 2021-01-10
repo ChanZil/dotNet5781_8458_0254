@@ -15,7 +15,7 @@ namespace PO
             set { SetValue(CodeProperty, value); }
         }
         public static readonly DependencyProperty CodeProperty =
-            DependencyProperty.Register("Code",
+            DependencyProperty.Register("Code", 
             typeof(int), typeof(POStationInLine));
 
         public string Name
