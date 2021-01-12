@@ -31,5 +31,11 @@ namespace PL
             LinesWindow linesWindow = new LinesWindow();
             linesWindow.Show();
         }
+
+        private void btnShowStations_Click(object sender, RoutedEventArgs e)
+        {
+            StationsWindow stationsWindow = new StationsWindow();
+            stationsWindow.Show();
+        }
     }
 }
