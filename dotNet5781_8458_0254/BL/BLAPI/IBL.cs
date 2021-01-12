@@ -36,5 +36,13 @@ namespace BLAPI
         //void CreateLineStation(DO.Line line);
         //void DeleteLineStation(DO.Line line);
         #endregion LineStation
+        #region Bus
+        IEnumerable<BO.BOBus> GetAllBOBuses();
+        //IEnumerable<BO.BOBus> GetAllBusesBy(Predicate<BO.BOBus> predicate);
+        BO.BOBus GetBus(int id);
+        void CreateBus(int id, DateTime fromDate, double total, double fuelRemain, BO.BusStatus status);
+        void UpdateBus(BO.BOBus bus);
+        void DeleteBus(BO.BOBus bOBus);
+        #endregion Bus
     }
 }

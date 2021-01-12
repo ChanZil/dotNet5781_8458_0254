@@ -190,6 +190,61 @@ namespace BL
 
         //}
         #endregion  LineStation
+        #region Bus
+        BO.BOBus BusDoBoAdapter(DO.Bus busDO)
+        {
+            BO.BOBus busBO = new BO.BOBus();
+            busBO.LicenseNum = busDO.LicenseNum;
+            busBO.FromDate = busDO.FromDate;
+            busBO.TotalTrip = busDO.TotalTrip;
+            busBO.FuelRemain = busDO.FuelRemain;
+            busBO.Status = (BO.BusStatus)busDO.Status;
+            return busBO;
+        }
+        public IEnumerable<BO.BOBus> GetAllBOBuses()
+        {
+            var busDl = dl.GetAllBuses();
+            return from item in busDl
+                   select BusDoBoAdapter(item);
+        }
+        //public IEnumerable<BO.BOBus> GetAllBusesBy(Predicate<BO.BOBus> predicate)
+        //{
+
+        //}
+        public BO.BOBus GetBus(int id)
+        {
+            var dOBus = dl.GetBus(id);
+            return BusDoBoAdapter(dOBus);
+        }
+        public void CreateBus(int id, DateTime fromDate, double total, double fuelRemain, BO.BusStatus status)
+        {
+            DO.Bus dOBus = new DO.Bus
+            {
+                LicenseNum = id,
+                FromDate = fromDate,
+                TotalTrip = total,
+                FuelRemain = fuelRemain,
+                Status = (DO.BusStatus)status
+            };
+            dl.CreateBus(dOBus);
+        }
+        public void UpdateBus(BO.BOBus bus)
+        {
+            DO.Bus dOBus = new DO.Bus
+            {
+                LicenseNum = bus.LicenseNum,
+                FromDate = bus.FromDate,
+                TotalTrip = bus.TotalTrip,
+                FuelRemain = bus.FuelRemain,
+                Status = (DO.BusStatus)bus.Status
+            };
+            dl.UpdateBus(dOBus);
+        }
+        public void DeleteBus(BO.BOBus bOBus)
+        {
+            dl.DeleteBus(bOBus.LicenseNum);
+        }
+        #endregion Bus
     }
 }
 

@@ -37,5 +37,11 @@ namespace PL
             StationsWindow stationsWindow = new StationsWindow();
             stationsWindow.Show();
         }
+
+        private void btnShowBus_Click(object sender, RoutedEventArgs e)
+        {
+            BusWindow busWindow = new BusWindow();
+            busWindow.Show();
+        }
     }
 }

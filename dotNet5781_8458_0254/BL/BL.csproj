@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BLAPI\BLFactory.cs" />
     <Compile Include="BLImp.cs" />
+    <Compile Include="BO\BOBus.cs" />
     <Compile Include="BO\BOenums.cs" />
     <Compile Include="BO\BOExceptions.cs" />
     <Compile Include="BO\BOLine.cs" />
