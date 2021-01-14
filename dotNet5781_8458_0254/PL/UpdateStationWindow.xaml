@@ -1,0 +1,21 @@
+﻿<Window x:Class="PL.UpdateStationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="UpdateStationWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="שם תחנה" HorizontalAlignment="Left" Margin="637,90,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Content="כתובת" HorizontalAlignment="Left" Margin="653,149,0,0" VerticalAlignment="Top"/>
+        <Label Content="קו אורך" HorizontalAlignment="Left" Margin="653,211,0,0" VerticalAlignment="Top"/>
+        <Label Content="קו רוחב" HorizontalAlignment="Left" Margin="648,267,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="469,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbAddress" HorizontalAlignment="Left" Height="23" Margin="469,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbLongitude" HorizontalAlignment="Left" Height="23" Margin="469,215,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.398,0.679"/>
+        <TextBox x:Name="tbLatitude" HorizontalAlignment="Left" Height="23" Margin="469,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnUpdateStation" Content="עדכן" HorizontalAlignment="Left" Margin="76,341,0,0" VerticalAlignment="Top" Width="75" Click="btnUpdateStation_Click"/>
+
+    </Grid>
+</Window>

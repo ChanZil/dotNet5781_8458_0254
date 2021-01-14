@@ -16,14 +16,14 @@ namespace BLAPI
         #endregion Line
         #region StationInLine
         IEnumerable<BO.BOStationInLine> GetAllStationInLine();
-        IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate);
+        IEnumerable<BO.BOStationInLine> GetAllStationInLineByCodeLine(int code);
         BO.BOStationInLine GetStationInLine(int id);
         //void CreateStationInLine(int code, string name, double longitude, double latitude, string address);
         //void UpdateStationInLine(BO.BOStationInLine stationInLine);
         //void DeleteStationInLine(BO.BOStationInLine stationInLine);
         #endregion StationInLine
         #region Station
-        //IEnumerable<BO.BOStation> GetAllStations();
+        IEnumerable<BO.BOStation> GetAllStations();
         //IEnumerable<BO.BOStation> GetAllGetAllStationsBy(Predicate<BO.BOStation> predicate);
         //BO.BOLine GetStation(int id);
         //void CreateStation(DO.Station station);
@@ -31,7 +31,7 @@ namespace BLAPI
         //void DeleteStation(int id);
         #endregion Station
         #region LineStation
-        //IEnumerable<BO.BOLineStation> GetAllLineStationBy(Predicate<BO.BOLineStation> predicate);
+        IEnumerable<BO.BOLineStation> GetAllLineStationByStationId(int stationId);
         //BO.BOLineStation GetLineStation(int id);
         //void CreateLineStation(DO.Line line);
         //void DeleteLineStation(DO.Line line);

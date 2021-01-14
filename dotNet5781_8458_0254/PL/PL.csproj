@@ -57,13 +57,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBusWindow.xaml.cs">
+      <DependentUpon>AddBusWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusWindow.xaml.cs">
       <DependentUpon>BusWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PO\POLineStation.cs" />
     <Compile Include="PO\POBus.cs" />
+    <Compile Include="PO\POStation.cs" />
     <Compile Include="StationsWindow.xaml.cs">
       <DependentUpon>StationsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateBusWindow.xaml.cs">
+      <DependentUpon>UpdateBusWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateStationWindow.xaml.cs">
+      <DependentUpon>UpdateStationWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddBusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +106,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UpdateBusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateStationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PO\POLines.cs" />
@@ -112,7 +135,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\AddBusWindow.datasource" />
     <None Include="Properties\DataSources\App.datasource" />
+    <None Include="Properties\DataSources\BL.BLImp.datasource" />
+    <None Include="Properties\DataSources\BLAPI.BLFactory.datasource" />
+    <None Include="Properties\DataSources\BLAPI.IBL.datasource" />
+    <None Include="Properties\DataSources\BO.BadBusIdException.datasource" />
+    <None Include="Properties\DataSources\BO.BadLineIdExeption.datasource" />
+    <None Include="Properties\DataSources\BO.BadStationIdException.datasource" />
+    <None Include="Properties\DataSources\BO.BOBus.datasource" />
+    <None Include="Properties\DataSources\BO.BOLine.datasource" />
+    <None Include="Properties\DataSources\BO.BOLineStation.datasource" />
+    <None Include="Properties\DataSources\BO.BOStation.datasource" />
+    <None Include="Properties\DataSources\BO.BOStationInLine.datasource" />
     <None Include="Properties\DataSources\BusWindow.datasource" />
     <None Include="Properties\DataSources\LinesWindow.datasource" />
     <None Include="Properties\DataSources\MainWindow.datasource" />
@@ -120,8 +155,11 @@
     <None Include="Properties\DataSources\PL.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\PO.POBus.datasource" />
     <None Include="Properties\DataSources\PO.POLines.datasource" />
+    <None Include="Properties\DataSources\PO.POLineStation.datasource" />
+    <None Include="Properties\DataSources\PO.POStation.datasource" />
     <None Include="Properties\DataSources\PO.POStationInLine.datasource" />
     <None Include="Properties\DataSources\StationsWindow.datasource" />
+    <None Include="Properties\DataSources\UpdateBusWindow.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

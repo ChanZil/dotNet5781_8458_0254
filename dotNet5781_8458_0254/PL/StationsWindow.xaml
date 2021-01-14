@@ -1,12 +1,90 @@
-﻿<Window x:Class="PL.StationsWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:PO="clr-namespace:PO" xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.StationsWindow"
         mc:Ignorable="d"
-        Title="StationsWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="StationsWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="pOStationViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POStation}, CreateList=True}"/>
+        <CollectionViewSource x:Key="bOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BOLineStation}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource pOStationViewSource}">
+
+        <DataGrid x:Name="pOStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="397,41,10,104" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft" SelectionChanged="pOStationDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="codeColumn" Width="100" Header="מספר תחנה">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Code}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="nameColumn" Width="100" Header="שם תחנה">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="addressColumn" Width="100" Header="כתובת">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Address}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="showLinesColumn" Width="100" Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="הצג קווים" Click="btnShowLines_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="updateStationColumn" Width="100" Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="עדכן" Click="btnUpdateStation_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="deleteStationColumn" Width="100" Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="מחק" Click="btnDeleteStation_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="bOLineStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="68,59,442,160" ItemsSource="{Binding Source={StaticResource bOLineStationViewSource}}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="codeColumn1" Width="100" Header="מספר קו">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Code}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="areaColumn" Width="100" Header="אזור">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Area}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="lineStationIndexColumn" Width="SizeToHeader" Header="אינדקס התחנה בקו">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding LineStationIndex}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

@@ -21,4 +21,13 @@ namespace BO
             base(message, innerException) => ID = ((DO.BadStationIdException)innerException).ID;
         public override string ToString() => base.ToString() + $", bad station id: {ID}";
     }
+
+    [Serializable]
+    public class BadBusIdException : Exception
+    {
+        public int ID;
+        public BadBusIdException(string message, Exception innerException) :
+            base(message, innerException) => ID = ((DO.BadBusIdException)innerException).ID;
+        public override string ToString() => base.ToString() + $", bad bus license number: {ID}";
+    }
 }

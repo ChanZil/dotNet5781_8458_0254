@@ -72,7 +72,9 @@ namespace DL
         }
         public IEnumerable<DO.Station> GetAllStationsBy(Predicate<DO.Station> predicate)
         {
-            throw new NotImplementedException();
+            return from station in DataSource.listStations
+                   where predicate(station)
+                   select station.Clone();
         }
         public void CreateStation(int code, string name, double longitude, double latitude, string address)
         {
@@ -169,7 +171,9 @@ namespace DL
         }
         public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> predicate)
         {
-            throw new NotImplementedException();
+            return from lineStation in DataSource.listLineStations
+                   where predicate(lineStation)
+                   select lineStation.Clone();
         }
         public void CreateAllLineStations(int lineId, int stationId, int index, int prev, int next)
         {

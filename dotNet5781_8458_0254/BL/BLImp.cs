@@ -24,7 +24,9 @@ namespace BL
         {
             DO.Line line = dl.GetLine(id);
             DO.LineTrip lineTrip = dl.GetLineTrip(id);
-            IEnumerable<DO.LineStation> lineStations = dl.GetAllLineStationsBy(l => l.LineId == id); //a collection of all lineStations of the recieved line id from DL
+            IEnumerable<DO.LineStation> lineStations = from lineStation in dl.GetAllLineStations()
+                                                       where lineStation.LineId == id
+                                                       select lineStation; //a collection of all lineStations of the recieved line id from DL
             IEnumerable<DO.Station> DOstations = from lineStation in lineStations //a collection of all stations from DL, according the collection of the lineStations
                                                  select dl.GetStation(lineStation.Station);
             IEnumerable<BO.BOStationInLine> BOstations = from station in DOstations //convert the collection of the DOstations to BOStationInLine
@@ -96,9 +98,15 @@ namespace BL
             return from item in listOfStations
                    select StationDoBoAdapter(item);
         }
-        public IEnumerable<BO.BOStationInLine> GetAllStationInLineBy(Predicate<BO.BOStationInLine> predicate)
+        public IEnumerable<BO.BOStationInLine> GetAllStationInLineByCodeLine(int code)
         {
-            throw new NotImplementedException();
+            var listOfLineStations = dl.GetAllLineStationsBy(s=> s.LineId==code);
+            var listOfStations = from lineStation in listOfLineStations
+                                 from station in dl.GetAllStations()
+                                 where station.Code == lineStation.Station
+                                 select station;
+            return from item in listOfStations
+                   select StationDoBoAdapter(item);
         }
 
         public BO.BOStationInLine GetStationInLine(int id)
@@ -148,9 +156,19 @@ namespace BL
         //}
         #endregion StationInLine
         #region Station
-        //public IEnumerable<BO.BOStation> GetAllStations() 
-        //{ 
-        //}
+        public IEnumerable<BO.BOStation> GetAllStations()
+        {
+            return from station in dl.GetAllStations()
+                   select new BO.BOStation
+                   {
+                       Code = station.Code,
+                       Name = station.Name,
+                       Address = station.Address,
+                       Longitude = station.Longitude,
+                       Latitude = station.Latitude,
+                       ListOfLines = GetAllLineStationByStationId(station.Code)
+                   };
+        }
         //public IEnumerable<BO.BOStation> GetAllGetAllStationsBy(Predicate<BO.BOStation> predicate)
         //{
 
@@ -173,10 +191,18 @@ namespace BL
         //}
         #endregion Station
         #region  LineStation
-        //public IEnumerable<BO.BOLineStation> GetAllLineStationBy(Predicate<BO.BOLineStation> predicate)
-        //{
-
-        //}
+        public IEnumerable<BO.BOLineStation> GetAllLineStationByStationId(int stationId)
+        {
+            return from lineStation in dl.GetAllLineStationsBy(l => l.Station == stationId)
+                   let line = dl.GetLine(lineStation.LineId)
+                   select new BO.BOLineStation
+                   {
+                       Id = line.Id,
+                       Code = line.Code,
+                       Area = (BO.Areas)line.Area,
+                       LineStationIndex = lineStation.LineStationIndex
+                   };
+        }
         //public BO.BOLineStation GetLineStation(int id)
         //{
 
@@ -226,7 +252,14 @@ namespace BL
                 FuelRemain = fuelRemain,
                 Status = (DO.BusStatus)status
             };
-            dl.CreateBus(dOBus);
+            try
+            {
+                dl.CreateBus(dOBus);
+            }
+            catch(DO.BadBusIdException ex)
+            {
+                throw new BO.BadBusIdException("מספר אוטובוס קיים", ex);
+            }
         }
         public void UpdateBus(BO.BOBus bus)
         {
@@ -238,11 +271,27 @@ namespace BL
                 FuelRemain = bus.FuelRemain,
                 Status = (DO.BusStatus)bus.Status
             };
-            dl.UpdateBus(dOBus);
+            try
+            {
+                dl.UpdateBus(dOBus);
+            }
+            catch(DO.BadBusIdException ex)
+            {
+                throw new BO.BadBusIdException("מספר הרישוי כבר קיים במערכת", ex);
+            }
+            
         }
         public void DeleteBus(BO.BOBus bOBus)
         {
-            dl.DeleteBus(bOBus.LicenseNum);
+            try
+            {
+                dl.DeleteBus(bOBus.LicenseNum);
+            }
+            catch(DO.BadBusIdException ex)
+            {
+                throw new BO.BadBusIdException("אוטובוס לא קיים", ex);
+            }
+            
         }
         #endregion Bus
     }

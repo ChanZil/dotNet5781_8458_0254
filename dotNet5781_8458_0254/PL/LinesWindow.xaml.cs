@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 using BLAPI;
 
 namespace PL
@@ -24,38 +25,40 @@ namespace PL
         public LinesWindow()
         {
             InitializeComponent();
-            var listOfStations = bl.GetAllStationInLine();
-            var stations = from item in listOfStations
-                           select new
-                           {
-                               Code = item.Code,
-                               Name = item.Name,
-                               Address = item.Address
-                           };
-            dgStationInLIne.ItemsSource = stations;
-            var listOfLine = bl.GetAllBOLines();
-            var lines = from item in listOfLine
-                        select new
-                        {
-                            Id = item.Id,
-                            Code = item.Code,
-                            Area = item.Area,
-                            StartAt = item.StartAt,
-                            FinishAt = item.FinishAt,
-                            Frequency = item.Frequency,
-                            ListOfStationInLine = item.ListOfStationInLine
-                        };
-            lbLines.ItemsSource = lines;
+            var bOLines = bl.GetAllBOLines();
+            var pOLines = from line in bOLines
+                          select new PO.POLines
+                          {
+                              Id = line.Id,
+                              Code = line.Code,
+                              Area = line.Area,
+                              StartAt = line.StartAt,
+                              FinishAt = line.FinishAt,
+                              Frequency = line.Frequency,
+                          };
+            foreach(PO.POLines line in pOLines)
+            {
+                foreach (BO.BOStationInLine stationInLine in bl.GetAllStationInLineByCodeLine(line.Id))
+                    line.ListOfStationInLine.Add(new PO.POStationInLine
+                    {
+                        Code = stationInLine.Code,
+                        Name = stationInLine.Name,
+                        Longitude = stationInLine.Longitude,
+                        Latitude = stationInLine.Latitude,
+                        Address = stationInLine.Address
+                    });
+            }
+            pOLinesDataGrid.DataContext = pOLines;
+
+
         }
 
-        private void lbLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void dgStationInLIne_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            System.Windows.Data.CollectionViewSource pOLinesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("pOLinesViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // pOLinesViewSource.Source = [generic data source]
         }
     }
 }

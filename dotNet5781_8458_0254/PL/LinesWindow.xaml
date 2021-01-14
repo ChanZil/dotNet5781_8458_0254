@@ -1,20 +1,16 @@
-﻿<Window x:Class="PL.LinesWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:PO="clr-namespace:PO" x:Class="PL.LinesWindow"
         mc:Ignorable="d"
-        Title="LinesWindow" Height="450" Width="800">
-    <Grid Margin="0,0,-8,2">
-        <DataGrid x:Name="dgStationInLIne" Height="303" Margin="347,43,0,0" VerticalAlignment="Top" Width="240" HorizontalAlignment="Left" FlowDirection="RightToLeft" SelectionChanged="dgStationInLIne_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="קוד תחנה" Binding ="{Binding Code}"/>
-                <DataGridTextColumn Header="שם תחנה" Binding ="{Binding Name}"/>
-                <DataGridTextColumn Header="כתובת" Binding ="{Binding Address}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <ListBox x:Name="lbLines" HorizontalAlignment="Left" Height="303" Margin="603,43,0,0" VerticalAlignment="Top" Width="172" SelectionChanged="lbLines_SelectionChanged"/>
+        Title="LinesWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="pOLinesViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POLines}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid Margin="0,0,-8,2" DataContext="{StaticResource pOLinesViewSource}">
         <Button x:Name="btnAddLine" Content="הוספה" HorizontalAlignment="Left" Margin="700,361,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnUpdateLine" Content="עדכון" HorizontalAlignment="Left" Margin="700,387,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnDeleteLine" Content="מחיקה" HorizontalAlignment="Left" Margin="603,361,0,0" VerticalAlignment="Top" Width="75"/>
@@ -28,5 +24,45 @@
             <Label x:Name="lblFinishAt" Content="שעת סיום" HorizontalAlignment="Left" Margin="195,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.469,1.115"/>
             <Label x:Name="lblFrequency" Content="תדירות" HorizontalAlignment="Left" Margin="211,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.469,1.115"/>
         </Grid>
+        <DataGrid x:Name="pOLinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="356,43,44,174" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="codeColumn" Header="מספר קו" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Code}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn x:Name="areaColumn" Header="אזור" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Area}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="startAtColumn" Header="שעת התחלה" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding StartAt}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="finishAtColumn" Header="שעת סיום" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding FinishAt}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="frequencyColumn" Header="תדירות" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Frequency}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
