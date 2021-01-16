@@ -177,18 +177,62 @@ namespace BL
         //{
 
         //}
-        //public void CreateStation(DO.Station station)
-        //{ 
+        public void CreateStation(BO.BOStation station)
+        {
+            try
+            {
+                dl.CreateStation(station.Code, station.Name, station.Longitude, station.Latitude, station.Address);
+            }
+            catch(DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("קוד תחנה כבר קיים", ex);
+            }
+        }
+        public void UpdateStation(BO.BOStation station)
+        {
+            DO.Station doStation = new DO.Station
+            {
+                Code = station.Code,
+                Name = station.Name,
+                Address = station.Address,
+                Longitude = station.Longitude,
+                Latitude = station.Latitude
+            };
+            try
+            {
+                dl.UpdateStation(doStation);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException("תחנה לא קיימת", ex);
+            }
+        }
+        public void DeleteStation(int id)
+        { 
+            var lineStations = dl.GetAllLineStationsBy(s => s.Station == id);
+            foreach (DO.LineStation lineStation in lineStations)
+            {
+                if (lineStation.LineStationIndex != 0)
+                    dl.GetLineStation(lineStation.LineId, lineStation.PrevStation).NextStation = lineStation.NextStation;
+                if (lineStation.NextStation != 0)
+                    dl.GetLineStation(lineStation.LineId, lineStation.NextStation).PrevStation = lineStation.PrevStation;
+                DO.LineStation pointerLineStation = lineStation;
+                while (pointerLineStation.NextStation != 0)
+                {
+                    pointerLineStation = dl.GetLineStation(lineStation.LineId, lineStation.NextStation);
+                    pointerLineStation.LineStationIndex--;
+                }
+                if (lineStation.LineStationIndex != 0)
+                    dl.DeleteAdjacentStations(lineStation.PrevStation, lineStation.Station);
+                if (lineStation.NextStation != 0)
+                    dl.DeleteAdjacentStations(lineStation.Station, lineStation.NextStation);
+                if (lineStation.PrevStation != 0 && lineStation.NextStation != 0)
+                    dl.CreateAdjacentStations(lineStation.PrevStation, lineStation.NextStation, 0, new TimeSpan(0, 0, 0));
+                dl.DeleteLineStation(lineStation.LineId, lineStation.Station);
+            }
+            dl.DeleteStation(id);
 
-        //}
-        //public void UpdateStation(BO.BOStation station)
-        //{
-
-        //}
-        //public void DeleteStation(int id)
-        //{
-
-        //}
+        }
         #endregion Station
         #region  LineStation
         public IEnumerable<BO.BOLineStation> GetAllLineStationByStationId(int stationId)

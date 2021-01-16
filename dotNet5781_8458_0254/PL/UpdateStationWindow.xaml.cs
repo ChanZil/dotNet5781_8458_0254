@@ -35,7 +35,20 @@ namespace PL
 
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
-
+            station.Name = tbName.Text;
+            station.Address = tbAddress.Text;
+            station.Longitude = Convert.ToDouble(tbLongitude.Text);
+            station.Latitude = Convert.ToDouble(tbLatitude.Text);
+            try
+            {
+                bl.UpdateStation(station);
+                this.Close();
+            }
+            catch(BO.BadStationIdException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

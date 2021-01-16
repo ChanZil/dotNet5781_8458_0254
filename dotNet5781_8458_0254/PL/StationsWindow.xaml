@@ -85,6 +85,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnAddStation" Content="הוסף תחנה" HorizontalAlignment="Left" Margin="81,365,0,0" VerticalAlignment="Top" Width="75" Click="btnAddStation_Click"/>
 
     </Grid>
 </Window>

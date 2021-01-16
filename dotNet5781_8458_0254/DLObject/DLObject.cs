@@ -222,7 +222,9 @@ namespace DL
         }
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> predicate)
         {
-            throw new NotImplementedException();
+            return from adjacentStations in DataSource.listAdjacentStations
+                   where predicate(adjacentStations)
+                   select adjacentStations.Clone();
         }
         public void CreateAdjacentStations(int codeStation1, int codeStation2, double distance, TimeSpan time)
         {

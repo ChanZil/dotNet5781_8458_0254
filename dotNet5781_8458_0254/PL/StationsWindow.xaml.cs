@@ -57,7 +57,31 @@ namespace PL
         }
         private void btnDeleteStation_Click(object sender, RoutedEventArgs e)
         {
-            
+            BO.BOStation bOStation = pOStationDataGrid.SelectedItem as BO.BOStation;
+            if (MessageBox.Show("האם למחוק תחנה זו?", "מחיקת תחנת אוטובוס", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    bl.DeleteStation(bOStation.Code);
+                }
+                catch (BO.BadStationIdException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
+        {
+           BO.BOStation bOStation = pOStationDataGrid.SelectedItem as BO.BOStation;
+            UpdateStationWindow updateStationWindow = new UpdateStationWindow(bOStation);
+            updateStationWindow.Show();
+
+        }
+
+        private void btnAddStation_Click(object sender, RoutedEventArgs e)
+        {
+            AddStationWindow stationWindow = new AddStationWindow(bOStations);
+            stationWindow.Show();
         }
     }
 }

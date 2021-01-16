@@ -26,9 +26,9 @@ namespace BLAPI
         IEnumerable<BO.BOStation> GetAllStations();
         //IEnumerable<BO.BOStation> GetAllGetAllStationsBy(Predicate<BO.BOStation> predicate);
         //BO.BOLine GetStation(int id);
-        //void CreateStation(DO.Station station);
-        //void UpdateStation(BO.BOStation station);
-        //void DeleteStation(int id);
+        void CreateStation(BO.BOStation station);
+        void UpdateStation(BO.BOStation station);
+        void DeleteStation(int id);
         #endregion Station
         #region LineStation
         IEnumerable<BO.BOLineStation> GetAllLineStationByStationId(int stationId);

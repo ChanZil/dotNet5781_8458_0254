@@ -39,7 +39,7 @@ namespace PL
                 TotalTrip = Convert.ToDouble(txbTotalTrip.Text),
                 FuelRemain = Convert.ToDouble(txbFuelRemain.Text),
                 Status = (BO.BusStatus)cbStatus.SelectedIndex
-        };
+            };
             try
             {
                 bl.CreateBus(pOBus.LicenseNum, pOBus.FromDate, pOBus.TotalTrip, pOBus.FuelRemain, pOBus.Status);
