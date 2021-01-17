@@ -10,6 +10,7 @@
     <Window.Resources>
         <CollectionViewSource x:Key="pOStationViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POStation}, CreateList=True}"/>
         <CollectionViewSource x:Key="bOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BOLineStation}, CreateList=True}"/>
+        <CollectionViewSource x:Key="pOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POLineStation}, CreateList=True}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource pOStationViewSource}">
 
@@ -59,24 +60,24 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-        <DataGrid x:Name="bOLineStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="68,59,442,160" ItemsSource="{Binding Source={StaticResource bOLineStationViewSource}}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft">
+        <Button x:Name="btnAddStation" Content="הוסף תחנה" HorizontalAlignment="Left" Margin="81,365,0,0" VerticalAlignment="Top" Width="75" Click="btnAddStation_Click"/>
+        <DataGrid x:Name="pOLineStationDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource pOLineStationViewSource}}" Margin="101,41,466,178" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft">
             <DataGrid.Columns>
-                <DataGridTemplateColumn x:Name="codeColumn1" Width="100" Header="מספר קו">
+                <DataGridTemplateColumn x:Name="codeColumn1" Header="מספר תחנה" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Code}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="areaColumn" Width="100" Header="אזור">
+                <DataGridTemplateColumn x:Name="areaColumn" Header="אזור" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Area}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="lineStationIndexColumn" Width="SizeToHeader" Header="אינדקס התחנה בקו">
+                <DataGridTemplateColumn x:Name="lineStationIndexColumn" Header="אינדקס התחנה" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding LineStationIndex}"/>
@@ -85,7 +86,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAddStation" Content="הוסף תחנה" HorizontalAlignment="Left" Margin="81,365,0,0" VerticalAlignment="Top" Width="75" Click="btnAddStation_Click"/>
-
     </Grid>
 </Window>

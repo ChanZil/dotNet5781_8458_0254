@@ -22,15 +22,15 @@ namespace PL
     public partial class UpdateStationWindow : Window
     {
         IBL bl = BLFactory.GetBL("1");
-        BO.BOStation station;
-        public UpdateStationWindow(BO.BOStation bOStation)
+        PO.POStation station;
+        public UpdateStationWindow(PO.POStation pOStation)
         {
             InitializeComponent();
-            tbName.Text = bOStation.Name;
-            tbAddress.Text = bOStation.Address;
-            tbLongitude.Text = bOStation.Longitude.ToString();
-            tbLatitude.Text = bOStation.Latitude.ToString();
-            station = bOStation;
+            tbName.Text = pOStation.Name;
+            tbAddress.Text = pOStation.Address;
+            tbLongitude.Text = pOStation.Longitude.ToString();
+            tbLatitude.Text = pOStation.Latitude.ToString();
+            station = pOStation;
         }
 
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
@@ -39,9 +39,17 @@ namespace PL
             station.Address = tbAddress.Text;
             station.Longitude = Convert.ToDouble(tbLongitude.Text);
             station.Latitude = Convert.ToDouble(tbLatitude.Text);
+            BO.BOStation bOStation = new BO.BOStation
+            {
+                Code = station.Code,
+                Name = station.Name,
+                Address = station.Address,
+                Longitude = station.Longitude,
+                Latitude = station.Latitude
+            };
             try
             {
-                bl.UpdateStation(station);
+                bl.UpdateStation(bOStation);
                 this.Close();
             }
             catch(BO.BadStationIdException ex)

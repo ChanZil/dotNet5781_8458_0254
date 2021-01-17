@@ -143,7 +143,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\AddBusWindow.datasource" />
+    <None Include="Properties\DataSources\AddBusWindow1.datasource" />
+    <None Include="Properties\DataSources\AddStationWindow.datasource" />
+    <None Include="Properties\DataSources\AddStationWindow1.datasource" />
     <None Include="Properties\DataSources\App.datasource" />
+    <None Include="Properties\DataSources\App1.datasource" />
     <None Include="Properties\DataSources\BL.BLImp.datasource" />
     <None Include="Properties\DataSources\BLAPI.BLFactory.datasource" />
     <None Include="Properties\DataSources\BLAPI.IBL.datasource" />
@@ -156,17 +160,29 @@
     <None Include="Properties\DataSources\BO.BOStation.datasource" />
     <None Include="Properties\DataSources\BO.BOStationInLine.datasource" />
     <None Include="Properties\DataSources\BusWindow.datasource" />
+    <None Include="Properties\DataSources\BusWindow1.datasource" />
     <None Include="Properties\DataSources\LinesWindow.datasource" />
+    <None Include="Properties\DataSources\LinesWindow1.datasource" />
     <None Include="Properties\DataSources\MainWindow.datasource" />
+    <None Include="Properties\DataSources\MainWindow1.datasource" />
     <None Include="Properties\DataSources\PL.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\PL.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\PO.POBus.datasource" />
+    <None Include="Properties\DataSources\PO.POBus1.datasource" />
     <None Include="Properties\DataSources\PO.POLines.datasource" />
+    <None Include="Properties\DataSources\PO.POLines1.datasource" />
     <None Include="Properties\DataSources\PO.POLineStation.datasource" />
+    <None Include="Properties\DataSources\PO.POLineStation1.datasource" />
     <None Include="Properties\DataSources\PO.POStation.datasource" />
+    <None Include="Properties\DataSources\PO.POStation1.datasource" />
     <None Include="Properties\DataSources\PO.POStationInLine.datasource" />
+    <None Include="Properties\DataSources\PO.POStationInLine1.datasource" />
     <None Include="Properties\DataSources\StationsWindow.datasource" />
+    <None Include="Properties\DataSources\StationsWindow1.datasource" />
     <None Include="Properties\DataSources\UpdateBusWindow.datasource" />
+    <None Include="Properties\DataSources\UpdateBusWindow1.datasource" />
+    <None Include="Properties\DataSources\UpdateStationWindow.datasource" />
+    <None Include="Properties\DataSources\UpdateStationWindow1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -212,26 +212,40 @@ namespace BL
             var lineStations = dl.GetAllLineStationsBy(s => s.Station == id);
             foreach (DO.LineStation lineStation in lineStations)
             {
-                if (lineStation.LineStationIndex != 0)
+                if (lineStation.PrevStation != 0)
                     dl.GetLineStation(lineStation.LineId, lineStation.PrevStation).NextStation = lineStation.NextStation;
                 if (lineStation.NextStation != 0)
                     dl.GetLineStation(lineStation.LineId, lineStation.NextStation).PrevStation = lineStation.PrevStation;
                 DO.LineStation pointerLineStation = lineStation;
                 while (pointerLineStation.NextStation != 0)
                 {
-                    pointerLineStation = dl.GetLineStation(lineStation.LineId, lineStation.NextStation);
+                    pointerLineStation = dl.GetLineStation(lineStation.LineId, pointerLineStation.NextStation);
                     pointerLineStation.LineStationIndex--;
                 }
-                if (lineStation.LineStationIndex != 0)
+                if (lineStation.PrevStation != 0)
                     dl.DeleteAdjacentStations(lineStation.PrevStation, lineStation.Station);
                 if (lineStation.NextStation != 0)
                     dl.DeleteAdjacentStations(lineStation.Station, lineStation.NextStation);
                 if (lineStation.PrevStation != 0 && lineStation.NextStation != 0)
                     dl.CreateAdjacentStations(lineStation.PrevStation, lineStation.NextStation, 0, new TimeSpan(0, 0, 0));
-                dl.DeleteLineStation(lineStation.LineId, lineStation.Station);
+                //dl.DeleteLineStation(lineStation.LineId, lineStation.Station);
+            }
+            DO.LineStation pointer = dl.GetAllLineStationsBy(s => s.Station == id).First();
+            while(pointer!=null)
+            {
+                
+                try
+                {
+                    dl.DeleteLineStation(pointer.LineId, pointer.Station);
+                    pointer = dl.GetAllLineStationsBy(s => s.Station == id).First();
+                }
+                catch(Exception ex)
+                {
+                    break;
+                }
+                
             }
             dl.DeleteStation(id);
-
         }
         #endregion Station
         #region  LineStation

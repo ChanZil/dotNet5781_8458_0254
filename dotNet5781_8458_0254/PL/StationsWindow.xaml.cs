@@ -22,13 +22,34 @@ namespace PL
     public partial class StationsWindow : Window
     {
         IBL bl = BLFactory.GetBL("1");
-        ObservableCollection<BO.BOStation> bOStations = new ObservableCollection<BO.BOStation>();
+        ObservableCollection<PO.POStation> pOStations = new ObservableCollection<PO.POStation>();
         public StationsWindow()
         {
             InitializeComponent();
+
             foreach (BO.BOStation station in bl.GetAllStations())
-                bOStations.Add(station);
-            pOStationDataGrid.DataContext = bOStations;
+            {
+                PO.POStation pOStation = new PO.POStation
+                {
+                    Code = station.Code,
+                    Name = station.Name,
+                    Address = station.Address,
+                    Longitude = station.Longitude,
+                    Latitude = station.Latitude
+                };
+                foreach (BO.BOLineStation bOLineStation in bl.GetAllLineStationByStationId(station.Code))
+                {
+                    PO.POLineStation pOLineStation = new PO.POLineStation
+                    {
+                        Id = bOLineStation.Id,
+                        Code = bOLineStation.Code,
+                        LineStationIndex = bOLineStation.LineStationIndex
+                    };
+                    pOStation.ListOfLineStations.Add(pOLineStation);
+                }
+                pOStations.Add(pOStation);
+            }
+            pOStationDataGrid.DataContext = pOStations;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -40,6 +61,9 @@ namespace PL
             System.Windows.Data.CollectionViewSource bOLineStationViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("bOLineStationViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // bOLineStationViewSource.Source = [generic data source]
+            System.Windows.Data.CollectionViewSource pOLineStationViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("pOLineStationViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // pOLineStationViewSource.Source = [generic data source]
         }
 
         private void pOStationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,8 +72,8 @@ namespace PL
         }
         private void btnShowLines_Click(object sender, RoutedEventArgs e)
         {
-            BO.BOStation bOStation = pOStationDataGrid.SelectedValue as BO.BOStation;
-            bOLineStationDataGrid.ItemsSource = bl.GetAllLineStationByStationId(bOStation.Code);
+            PO.POStation pOStation = pOStationDataGrid.SelectedValue as PO.POStation;
+            pOLineStationDataGrid.ItemsSource = pOStation.ListOfLineStations;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -57,12 +81,29 @@ namespace PL
         }
         private void btnDeleteStation_Click(object sender, RoutedEventArgs e)
         {
-            BO.BOStation bOStation = pOStationDataGrid.SelectedItem as BO.BOStation;
+            PO.POStation pOStation = pOStationDataGrid.SelectedItem as PO.POStation;
+            BO.BOStation bOStation = new BO.BOStation
+            {
+                Code = pOStation.Code,
+                Name = pOStation.Name,
+                Address = pOStation.Address,
+                Longitude = pOStation.Longitude,
+                Latitude = pOStation.Latitude
+            };
+            var bOLineStations = from lineStation in pOStation.ListOfLineStations
+                                 select new BO.BOLineStation
+                                 {
+                                     Id = lineStation.Id,
+                                     Code = lineStation.Code,
+                                     LineStationIndex = lineStation.LineStationIndex
+                                 };
+            bOStation.ListOfLines = bOLineStations;
             if (MessageBox.Show("האם למחוק תחנה זו?", "מחיקת תחנת אוטובוס", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
                     bl.DeleteStation(bOStation.Code);
+                    pOStations.Remove(pOStation);
                 }
                 catch (BO.BadStationIdException ex)
                 {
@@ -72,15 +113,15 @@ namespace PL
         }
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
-           BO.BOStation bOStation = pOStationDataGrid.SelectedItem as BO.BOStation;
-            UpdateStationWindow updateStationWindow = new UpdateStationWindow(bOStation);
+            PO.POStation pOStation = pOStationDataGrid.SelectedItem as PO.POStation;
+            UpdateStationWindow updateStationWindow = new UpdateStationWindow(pOStation);
             updateStationWindow.Show();
 
         }
 
         private void btnAddStation_Click(object sender, RoutedEventArgs e)
         {
-            AddStationWindow stationWindow = new AddStationWindow(bOStations);
+            AddStationWindow stationWindow = new AddStationWindow(pOStations);
             stationWindow.Show();
         }
     }

@@ -22,16 +22,16 @@ namespace PL
     public partial class AddStationWindow : Window
     {
         IBL bl = BLFactory.GetBL("1");
-        ObservableCollection<BO.BOStation> bOStations;
-        public AddStationWindow(ObservableCollection<BO.BOStation> collection)
+        ObservableCollection<PO.POStation> pOStations;
+        public AddStationWindow(ObservableCollection<PO.POStation> collection)
         {
             InitializeComponent();
-            bOStations = collection;
+            pOStations = collection;
         }
 
         private void btnAddStation_Click(object sender, RoutedEventArgs e)
         {
-            BO.BOStation bOStation = new BO.BOStation
+            PO.POStation pOStation = new PO.POStation
             {
                 Code = Convert.ToInt32(tbCodeStation.Text),
                 Name = tbName.Text,
@@ -39,9 +39,18 @@ namespace PL
                 Longitude = Convert.ToDouble(tbLongitude.Text),
                 Latitude = Convert.ToDouble(tbLatitude.Text)
             };
+            BO.BOStation bOStation = new BO.BOStation
+            {
+                Code = pOStation.Code,
+                Name = pOStation.Name,
+                Address = pOStation.Address,
+                Longitude = pOStation.Longitude,
+                Latitude = pOStation.Latitude
+            };
             try
             {
                 bl.CreateStation(bOStation);
+                pOStations.Add(pOStation);
                 this.Close();
             }
             catch(BO.BadStationIdException ex)

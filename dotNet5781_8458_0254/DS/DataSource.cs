@@ -760,12 +760,12 @@ namespace DS
                     Station = 93,
                     LineStationIndex = 9,
                     PrevStation = 89,
-                    NextStation = 78
+                    NextStation = 122
                 },
                 new LineStation
                 {
                     LineId = 1,
-                    Station = 78,
+                    Station = 122,
                     LineStationIndex = 10,
                     PrevStation = 93,
                     NextStation = 0
@@ -840,12 +840,12 @@ namespace DS
                     Station = 76,
                     LineStationIndex = 9,
                     PrevStation = 77,
-                    NextStation = 86
+                    NextStation = 1522
                 },
                 new LineStation
                 {
                     LineId = 2,
-                    Station = 86,
+                    Station = 1522,
                     LineStationIndex = 10,
                     PrevStation = 76,
                     NextStation = 0
@@ -856,12 +856,12 @@ namespace DS
                     Station = 88,
                     LineStationIndex = 1,
                     PrevStation = 0,
-                    NextStation = 89
+                    NextStation = 1522
                 },
                 new LineStation
                 {
                     LineId = 3,
-                    Station = 89,
+                    Station = 1522,
                     LineStationIndex = 2,
                     PrevStation = 88,
                     NextStation = 93

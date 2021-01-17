@@ -81,7 +81,7 @@ namespace PL
                 try
                 {
                     bl.DeleteBus(bOBus);
-                    pOBuses.Remove(pOBuses.Where(b => b.LicenseNum == pOBus.LicenseNum).Single());
+                    pOBuses.Remove(pOBus);
                 }
                 catch (BO.BadBusIdException ex)
                 {

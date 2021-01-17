@@ -26,13 +26,21 @@ namespace PO
         public static readonly DependencyProperty CodeProperty =
             DependencyProperty.Register("Code",
             typeof(int), typeof(POLineStation));
+        public BO.Areas Area
+        {
+            get { return (BO.Areas)GetValue(AreaProperty); }
+            set { SetValue(AreaProperty, value); }
+        }
+        public static readonly DependencyProperty AreaProperty =
+            DependencyProperty.Register("Area",
+            typeof(BO.Areas), typeof(POLineStation));
         public int LineStationIndex
         {
             get { return (int)GetValue(LineStationIndexProperty); }
             set { SetValue(LineStationIndexProperty, value); }
         }
         public static readonly DependencyProperty LineStationIndexProperty =
-            DependencyProperty.Register("Id",
+            DependencyProperty.Register("LineStationIndex",
             typeof(int), typeof(POLineStation));
     }
 }
