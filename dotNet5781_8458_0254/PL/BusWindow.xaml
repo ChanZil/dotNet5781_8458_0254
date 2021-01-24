@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:PL"
         xmlns:PO="clr-namespace:PO" x:Class="PL.BusWindow"
         mc:Ignorable="d"
-        Title="BusWindow" Height="450" Width="800">
+        Title="תצוגת אוטובוסים" Height="450" Width="600">
     <Grid>
-        <Button x:Name="btnAddBus" Content="הוסף אוטובוס" HorizontalAlignment="Left" Margin="506,356,0,0" VerticalAlignment="Top" Width="75" Click="btnAddBus_Click"/>
-        <DataGrid x:Name="pOBusDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="25,36,321,43" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft" SelectionChanged="pOBusDataGrid_SelectionChanged">
+        <Button x:Name="btnAddBus" Content="הוסף אוטובוס" HorizontalAlignment="Left" Margin="31,378,0,0" VerticalAlignment="Top" Width="75" Click="btnAddBus_Click"/>
+        <DataGrid x:Name="pOBusDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="31,47,18,66" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft" SelectionChanged="pOBusDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="licenseNumColumn" Header="מספר רישוי" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
@@ -18,45 +18,38 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="fromDateColumn" Header="תאריך התחלה" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding FromDate}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="totalTripColumn" Header="נסועה" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding TotalTrip}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="fuelRemainColumn" Header="דלק" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding FuelRemain}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="statusColumn" Header="סטטוס" Width="SizeToHeader" FrameworkElement.FlowDirection="RightToLeft">
+                <DataGridTemplateColumn x:Name="statusColumn" Header="סטטוס" Width="70" FrameworkElement.FlowDirection="RightToLeft">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Status}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="update" Header="   " Width="SizeToHeader" FrameworkElement.FlowDirection="RightToLeft">
+                <DataGridTemplateColumn x:Name="update" Header="" Width="120" FrameworkElement.FlowDirection="RightToLeft">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="עדכון" Click="btnUpdateBus_Click"/>
+                            <Button Content="הצג/ עדכן אוטובוס" Click="btnUpdateBus_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="delete" Header="" Width="SizeToHeader" FrameworkElement.FlowDirection="RightToLeft">
+                <DataGridTemplateColumn x:Name="delete" Header="" Width="100" FrameworkElement.FlowDirection="RightToLeft">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="מחק" Click="btnDeleteBus_Click"/>
+                            <Button Content="מחק אוטובוס" Click="btnDeleteBus_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="treat" Header="" Width="100" FrameworkElement.FlowDirection="RightToLeft">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="שלח לטיפול" Click="btnTreat_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="fuel" Header="" Width="100" FrameworkElement.FlowDirection="RightToLeft">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="שלח לתדלוק" Click="btnFuel_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

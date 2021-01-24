@@ -13,147 +13,193 @@ namespace BL
         #region Line
         public IEnumerable<BO.BOLine> GetAllBOLines()
         {
-            return from item in dl.GetAllLines()
-                   select GetLine(item.Id);
+            var x = dl.GetAllLines();
+            return from line in dl.GetAllLines()
+                   select GetLine(line.Id);
         }
-        //public IEnumerable<BO.BOLine> GetAllLinesBy(Predicate<BO.BOLine> predicate)
-        //{
-
-        ////}
         public BO.BOLine GetLine(int id)
         {
-            DO.Line line = dl.GetLine(id);
-            DO.LineTrip lineTrip = dl.GetLineTrip(id);
-            IEnumerable<DO.LineStation> lineStations = from lineStation in dl.GetAllLineStations()
-                                                       where lineStation.LineId == id
-                                                       select lineStation; //a collection of all lineStations of the recieved line id from DL
-            IEnumerable<DO.Station> DOstations = from lineStation in lineStations //a collection of all stations from DL, according the collection of the lineStations
-                                                 select dl.GetStation(lineStation.Station);
-            IEnumerable<BO.BOStationInLine> BOstations = from station in DOstations //convert the collection of the DOstations to BOStationInLine
-                                                 select StationDoBoAdapter(station);
-            BO.BOLine boline = new BO.BOLine { Id = line.Id, Code = line.Code, Area = (BO.Areas)line.Area, StartAt = lineTrip.StartAt, FinishAt = lineTrip.FinishAt, Frequency = lineTrip.Frequency, ListOfStationInLine = BOstations };
-            return boline;
+            try 
+            {
+                var line = dl.GetLine(id);
+                var lineTrip = dl.GetLineTrip(id);
+                var x = GetAllStationInLineByCodeLine(id);
+                return new BO.BOLine
+                {
+                    Id = line.Id,
+                    Code = line.Code,
+                    Area = (BO.Areas)line.Area,
+                    StartAt = lineTrip.StartAt,
+                    FinishAt = lineTrip.FinishAt,
+                    Frequency = lineTrip.Frequency,
+                    ListOfStationInLine = GetAllStationInLineByCodeLine(id)
+                };
+            } 
+            catch (DO.BadLineIdException ex) 
+            {
+                throw new BO.BadLineIdExeption(ex.Message, ex);
+            }
         }
-        public void CreateLine(int code, DO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
+        public int CreateLine(int code, BO.Areas area, TimeSpan startAt, TimeSpan finishAt, TimeSpan frequency, IEnumerable<BO.BOStationInLine> listOfStationInLine)
         {
-            BO.BOLine bl = new BO.BOLine { Code = code, Area = (BO.Areas)area, StartAt = startAt, FinishAt = finishAt, Frequency = frequency, ListOfStationInLine = listOfStationInLine };
-            dl.CreateLine(bl.Code, area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
             try
             {
-                dl.CreateLineTrip(bl.Code, bl.StartAt, bl.FinishAt, bl.Frequency);
+                int id = dl.CreateLine(code, (DO.Areas)area, listOfStationInLine.First().Code, listOfStationInLine.Last().Code);
+                dl.CreateLineTrip(id, startAt, finishAt, frequency);
+                int i = 0;
+                foreach (BO.BOStationInLine bOStationInLine in listOfStationInLine)
+                {
+                    int prev = 0, next = 0;
+                    if (bOStationInLine.Code != listOfStationInLine.First().Code)
+                        prev = listOfStationInLine.ElementAt(i - 1).Code;
+                    if (bOStationInLine.Code != listOfStationInLine.Last().Code)
+                        prev = listOfStationInLine.ElementAt(i + 1).Code;
+                    CreateStationInLine(id, bOStationInLine.Code, bOStationInLine.Distance, bOStationInLine.Time, i, prev, next);
+                    i++;
+                }
+                return id;
+            } 
+            catch (DO.BadLineIdException ex) 
+            {
+                throw new BO.BadLineIdExeption(ex.Message, ex);
+            }
+        }
+        public void UpdateLine(BO.BOLine line)
+        {
+            BO.BOLine bOLine = line;
+            DeleteLine(line);
+            CreateLine(bOLine.Code, bOLine.Area, bOLine.StartAt, bOLine.FinishAt, bOLine.Frequency, bOLine.ListOfStationInLine);
+        }
+        public void DeleteLine(BO.BOLine bOLine)
+        {
+            try
+            {
+                var listStationsInLine = bOLine.ListOfStationInLine.ToList();
+                var pointer = listStationsInLine.FirstOrDefault();
+                while (pointer != null)
+                {
+                    DeleteStationInLine(pointer, bOLine.Id);
+                    listStationsInLine.RemoveAt(0);
+                    pointer = listStationsInLine.FirstOrDefault();
+                }
+                dl.DeleteLine(bOLine.Id);
+                dl.DeleteLineTrip(bOLine.Id);
             }
             catch (DO.BadLineIdException ex)
             {
-                throw new BO.BadLineIdExeption("Bad line id", ex);
+                throw new BO.BadLineIdExeption(ex.Message, ex);
             }
         }
-
-        //public void UpdateLine(BO.BOLine line)
-        //{
-
-        //}
-
-        //public void DeleteLine(BO.BOLine bOLine)
-        //{
-        //    //foreach (BO.BOStationInLine item in bOLine.ListOfStationInLine)
-        //    //{
-        //    //    DeleteStationInLine(item); //delete adStation linestation
-        //    //}
-        //    //try
-        //    //{
-        //    //    dl.DeleteLine(bOLine.Id);
-        //    //    dl.DeleteLineTrip(bOLine.Id);
-        //    //}
-        //    //catch (DO.BadLineIdException ex)
-        //    //{
-        //    //    throw new BO.BadLineIdExeption("Bad line id", ex);
-        //    //}
-        //    ////remove from list
-        //}
         #endregion Line
         #region StationInLine
-        BO.BOStationInLine StationDoBoAdapter(DO.Station stationInLineDO)
-        {
-            BO.BOStationInLine stationBO = new BO.BOStationInLine();
-            DO.Station stationDO;
-            int id = stationInLineDO.Code;
-            try
-            {
-                stationDO = dl.GetStation(id);
-            }
-            catch (DO.BadStationIdException ex)
-            {
-                throw new BO.BadStationIdException("bad station id", ex);
-            }
-            stationBO.Code = stationDO.Code;
-            stationBO.Name = stationDO.Name;
-            stationBO.Longitude = stationDO.Longitude;
-            stationBO.Latitude = stationDO.Latitude;
-            stationBO.Address = stationDO.Address;
-            return stationBO;
-        }
         public IEnumerable<BO.BOStationInLine> GetAllStationInLine()
         {
-            var listOfStations = dl.GetAllStations();
-            return from item in listOfStations
-                   select StationDoBoAdapter(item);
+            return from lineStatiion in dl.GetAllLineStations()
+                   select GetStationInLine(lineStatiion.LineId, lineStatiion.Station);
         }
-        public IEnumerable<BO.BOStationInLine> GetAllStationInLineByCodeLine(int code)
+        public IEnumerable<BO.BOStationInLine> GetAllStationInLineByCodeLine(int code) 
         {
-            var listOfLineStations = dl.GetAllLineStationsBy(s=> s.LineId==code);
-            var listOfStations = from lineStation in listOfLineStations
-                                 from station in dl.GetAllStations()
-                                 where station.Code == lineStation.Station
-                                 select station;
-            return from item in listOfStations
-                   select StationDoBoAdapter(item);
+            return from lineStatiion in dl.GetAllLineStationsBy(l => l.LineId == code)
+                   select GetStationInLine(code, lineStatiion.Station);
         }
-
-        public BO.BOStationInLine GetStationInLine(int id)
+        public BO.BOStationInLine GetStationInLine(int lineId, int stationId)
         {
             try
             {
-                DO.Station station = dl.GetStation(id);
-                return StationDoBoAdapter(station);
+                DO.LineStation lineStation = dl.GetLineStation(lineId, stationId);
+                DO.Station station = dl.GetStation(stationId);
+                double distance = 0;
+                TimeSpan time = new TimeSpan(0, 0, 0);
+                if (lineStation.NextStation != 0)
+                {
+                    DO.AdjacentStations adjacentStation = dl.GetAdjacentStations(lineId, stationId, lineStation.NextStation);
+                    distance = adjacentStation.Distance;
+                    time = adjacentStation.Time;
+                }
+                return new BO.BOStationInLine
+                {
+                    Code = station.Code,
+                    Name = station.Name,
+                    Address = station.Address,
+                    Distance = distance,
+                    Time = time
+                };
             }
-            catch (DO.BadStationIdException ex)
+            catch(DO.BadLineStationException ex)
             {
-                throw new BO.BadStationIdException("bad station id", ex);
+                throw new BO.BadStationIdException(ex.Message, ex);
+            }
+            catch(DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException(ex.Message, ex);
+            }
+            catch(DO.BadAdjacentStationsException ex)
+            {
+                throw new BO.BadAdjacentStationsIdException(ex.Message, ex);
             }
         }
-        //public void CreateStationInLine(int code, string name, double longitude, double latitude, string address)
-        //{
-        //    try
-        //    {
-        //        dl.CreateStation(code, name, longitude, latitude, address);
-        //    }
-        //    catch (DO.BadStationIdException ex)
-        //    {
-        //        throw new BO.BadStationIdException("bad station id", ex);
-        //    }
-        //}
-        //public void UpdateStationInLine(BO.BOStationInLine stationInLine)
-        //{
-        //    try
-        //    {
-        //        dl.UpdateStation(dl.GetStation(stationInLine.Code));
-        //    }
-        //    catch (DO.BadStationIdException ex)
-        //    {
-        //        throw new BO.BadStationIdException("bad station id", ex);
-        //    }
-        //}
-        //public void DeleteStationInLine(BO.BOStationInLine stationInLine)
-        //{
-        //    try
-        //    {
-        //        dl.DeleteStation(stationInLine.Code);
-        //    }
-        //    catch (DO.BadStationIdException ex)
-        //    {
-        //        throw new BO.BadStationIdException("bad station id", ex);
-        //    }
-        //}
+        public void DeleteStationInLine(BO.BOStationInLine stationInLine, int lineId)
+        {
+            try 
+            {
+                DO.LineStation lineStation = dl.GetLineStation(lineId, stationInLine.Code);
+                if (lineStation.PrevStation != 0)
+                {
+                    var updatedLineStation = dl.GetLineStation(lineStation.LineId, lineStation.PrevStation);
+                    updatedLineStation.NextStation = lineStation.NextStation;
+                    dl.UpdateLineStation(updatedLineStation);
+                }
+                if (lineStation.NextStation != 0)
+                {
+                    var updatedLineStation = dl.GetLineStation(lineStation.LineId, lineStation.NextStation);
+                    updatedLineStation.PrevStation = lineStation.PrevStation;
+                    dl.UpdateLineStation(updatedLineStation);
+                }
+                DO.LineStation pointerLineStation = dl.GetLineStation(lineId, stationInLine.Code);
+                while (pointerLineStation.NextStation != 0)
+                {
+                    pointerLineStation = dl.GetLineStation(lineStation.LineId, pointerLineStation.NextStation);
+                    pointerLineStation.LineStationIndex--;
+                }
+                if (lineStation.PrevStation != 0)
+                    dl.DeleteAdjacentStations(lineStation.LineId, lineStation.PrevStation, lineStation.Station);
+                if (lineStation.NextStation != 0)
+                    dl.DeleteAdjacentStations(lineStation.LineId, lineStation.Station, lineStation.NextStation);
+                if (lineStation.PrevStation != 0 && lineStation.NextStation != 0)
+                    dl.CreateAdjacentStations(lineStation.LineId, lineStation.PrevStation, lineStation.NextStation, 0, new TimeSpan(0, 0, 0));
+                dl.DeleteLineStation(lineStation.LineId, lineStation.Station);
+            }
+            catch(DO.BadLineStationException ex)
+            {
+                throw new BO.BadStationIdException(ex.Message, ex);
+            }
+            catch(DO.BadAdjacentStationsException ex)
+            {
+                throw new BO.BadAdjacentStationsIdException(ex.Message, ex);
+            }
+        }
+        public void CreateStationInLine(int lineId, int stationId, double distance, TimeSpan time, int index, int prev, int next)
+        {
+            try
+            {
+                dl.CreateLineStation(lineId, stationId, index, prev, next);
+                if (next != 0)
+                    dl.CreateAdjacentStations(lineId, stationId, next, distance, time);
+            }
+            catch(DO.BadLineStationException ex)
+            {
+                throw new BO.BadStationIdException(ex.Message, ex);
+            }
+            catch (DO.BadAdjacentStationsException ex)
+            {
+                throw new BO.BadAdjacentStationsIdException(ex.Message, ex);
+            }
+        }
+        public void UpdateStationInLine(BO.BOStationInLine stationInLine, int lineId, int index, int prev, int next)
+        {
+            DeleteStationInLine(stationInLine, lineId);
+            CreateStationInLine(lineId, stationInLine.Code, stationInLine.Distance, stationInLine.Time, index, prev, next);
+        }
         #endregion StationInLine
         #region Station
         public IEnumerable<BO.BOStation> GetAllStations()
@@ -169,14 +215,6 @@ namespace BL
                        ListOfLines = GetAllLineStationByStationId(station.Code)
                    };
         }
-        //public IEnumerable<BO.BOStation> GetAllGetAllStationsBy(Predicate<BO.BOStation> predicate)
-        //{
-
-        //}
-        //public BO.BOLine GetStation(int id)
-        //{
-
-        //}
         public void CreateStation(BO.BOStation station)
         {
             try
@@ -185,7 +223,7 @@ namespace BL
             }
             catch(DO.BadStationIdException ex)
             {
-                throw new BO.BadStationIdException("קוד תחנה כבר קיים", ex);
+                throw new BO.BadStationIdException(ex.Message, ex);
             }
         }
         public void UpdateStation(BO.BOStation station)
@@ -204,75 +242,79 @@ namespace BL
             }
             catch (DO.BadStationIdException ex)
             {
-                throw new BO.BadStationIdException("תחנה לא קיימת", ex);
+                throw new BO.BadStationIdException(ex.Message, ex);
             }
         }
         public void DeleteStation(int id)
-        { 
-            var lineStations = dl.GetAllLineStationsBy(s => s.Station == id);
-            foreach (DO.LineStation lineStation in lineStations)
+        {
+            try
             {
-                if (lineStation.PrevStation != 0)
-                    dl.GetLineStation(lineStation.LineId, lineStation.PrevStation).NextStation = lineStation.NextStation;
-                if (lineStation.NextStation != 0)
-                    dl.GetLineStation(lineStation.LineId, lineStation.NextStation).PrevStation = lineStation.PrevStation;
-                DO.LineStation pointerLineStation = lineStation;
-                while (pointerLineStation.NextStation != 0)
+                DO.LineStation lineStationPointer = dl.GetAllLineStationsBy(s => s.Station == id).FirstOrDefault();
+                while(lineStationPointer != null)
                 {
-                    pointerLineStation = dl.GetLineStation(lineStation.LineId, pointerLineStation.NextStation);
-                    pointerLineStation.LineStationIndex--;
+                    if (lineStationPointer.PrevStation != 0)
+                    {
+                        var x = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.PrevStation);
+                        x.NextStation = lineStationPointer.NextStation;
+                        dl.UpdateLineStation(x);
+                    }
+                    if (lineStationPointer.NextStation != 0)
+                    {
+                        var x = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.NextStation);
+                        x.PrevStation = lineStationPointer.PrevStation;
+                        dl.UpdateLineStation(x);
+                    }
+                    DO.LineStation pointer = lineStationPointer;
+                    while(pointer.NextStation != 0)
+                    {
+                        pointer = dl.GetLineStation(lineStationPointer.LineId, pointer.NextStation);
+                        pointer.LineStationIndex--;
+                    }
+                    if (lineStationPointer.PrevStation != 0)
+                        dl.DeleteAdjacentStations(lineStationPointer.LineId, lineStationPointer.PrevStation, lineStationPointer.Station);
+                    if (lineStationPointer.NextStation != 0)
+                        dl.DeleteAdjacentStations(lineStationPointer.LineId, lineStationPointer.Station, lineStationPointer.NextStation);
+                    if (lineStationPointer.PrevStation != 0 && lineStationPointer.NextStation != 0)
+                        dl.CreateAdjacentStations(lineStationPointer.LineId, lineStationPointer.PrevStation, lineStationPointer.NextStation, 0, new TimeSpan(0, 0, 0));
+                    dl.DeleteLineStation(lineStationPointer.LineId, lineStationPointer.Station);
+                    lineStationPointer = dl.GetAllLineStationsBy(s => s.Station == id).FirstOrDefault();
                 }
-                if (lineStation.PrevStation != 0)
-                    dl.DeleteAdjacentStations(lineStation.PrevStation, lineStation.Station);
-                if (lineStation.NextStation != 0)
-                    dl.DeleteAdjacentStations(lineStation.Station, lineStation.NextStation);
-                if (lineStation.PrevStation != 0 && lineStation.NextStation != 0)
-                    dl.CreateAdjacentStations(lineStation.PrevStation, lineStation.NextStation, 0, new TimeSpan(0, 0, 0));
-                //dl.DeleteLineStation(lineStation.LineId, lineStation.Station);
+                dl.DeleteStation(id);
             }
-            DO.LineStation pointer = dl.GetAllLineStationsBy(s => s.Station == id).First();
-            while(pointer!=null)
+            catch (DO.BadLineStationException ex)
             {
-                
-                try
-                {
-                    dl.DeleteLineStation(pointer.LineId, pointer.Station);
-                    pointer = dl.GetAllLineStationsBy(s => s.Station == id).First();
-                }
-                catch(Exception ex)
-                {
-                    break;
-                }
-                
+                throw new BO.BadStationIdException(ex.Message, ex);
             }
-            dl.DeleteStation(id);
+            catch (DO.BadAdjacentStationsException ex)
+            {
+                throw new BO.BadAdjacentStationsIdException(ex.Message, ex);
+            }
+            catch (DO.BadStationIdException ex)
+            {
+                throw new BO.BadStationIdException(ex.Message, ex);
+            }
         }
         #endregion Station
         #region  LineStation
         public IEnumerable<BO.BOLineStation> GetAllLineStationByStationId(int stationId)
         {
-            return from lineStation in dl.GetAllLineStationsBy(l => l.Station == stationId)
-                   let line = dl.GetLine(lineStation.LineId)
-                   select new BO.BOLineStation
-                   {
-                       Id = line.Id,
-                       Code = line.Code,
-                       Area = (BO.Areas)line.Area,
-                       LineStationIndex = lineStation.LineStationIndex
-                   };
+            try
+            {
+                return from lineStation in dl.GetAllLineStationsBy(l => l.Station == stationId)
+                       let line = dl.GetLine(lineStation.LineId)
+                       select new BO.BOLineStation
+                       {
+                           Id = line.Id,
+                           Code = line.Code,
+                           Area = (BO.Areas)line.Area,
+                           LineStationIndex = lineStation.LineStationIndex
+                       };
+            }
+            catch(DO.BadLineIdException ex)
+            {
+                throw new BO.BadLineIdExeption(ex.Message, ex);
+            }
         }
-        //public BO.BOLineStation GetLineStation(int id)
-        //{
-
-        //}
-        //public void CreateLineStation(DO.Line line)
-        //{
-
-        //}
-        //public void DeleteLineStation(DO.Line line)
-        //{
-
-        //}
         #endregion  LineStation
         #region Bus
         BO.BOBus BusDoBoAdapter(DO.Bus busDO)
@@ -291,14 +333,17 @@ namespace BL
             return from item in busDl
                    select BusDoBoAdapter(item);
         }
-        //public IEnumerable<BO.BOBus> GetAllBusesBy(Predicate<BO.BOBus> predicate)
-        //{
-
-        //}
         public BO.BOBus GetBus(int id)
         {
-            var dOBus = dl.GetBus(id);
-            return BusDoBoAdapter(dOBus);
+            try
+            {
+                var dOBus = dl.GetBus(id);
+                return BusDoBoAdapter(dOBus);
+            }
+            catch(DO.BadBusIdException ex)
+            {
+                throw new BO.BadBusIdException(ex.Message, ex);
+            }
         }
         public void CreateBus(int id, DateTime fromDate, double total, double fuelRemain, BO.BusStatus status)
         {
@@ -316,28 +361,14 @@ namespace BL
             }
             catch(DO.BadBusIdException ex)
             {
-                throw new BO.BadBusIdException("מספר אוטובוס קיים", ex);
+                throw new BO.BadBusIdException(ex.Message, ex);
             }
         }
         public void UpdateBus(BO.BOBus bus)
         {
-            DO.Bus dOBus = new DO.Bus
-            {
-                LicenseNum = bus.LicenseNum,
-                FromDate = bus.FromDate,
-                TotalTrip = bus.TotalTrip,
-                FuelRemain = bus.FuelRemain,
-                Status = (DO.BusStatus)bus.Status
-            };
-            try
-            {
-                dl.UpdateBus(dOBus);
-            }
-            catch(DO.BadBusIdException ex)
-            {
-                throw new BO.BadBusIdException("מספר הרישוי כבר קיים במערכת", ex);
-            }
-            
+            BO.BOBus temp = bus;
+            DeleteBus(bus);
+            CreateBus(temp.LicenseNum, temp.FromDate, temp.TotalTrip, temp.FuelRemain, temp.Status);
         }
         public void DeleteBus(BO.BOBus bOBus)
         {
@@ -347,9 +378,8 @@ namespace BL
             }
             catch(DO.BadBusIdException ex)
             {
-                throw new BO.BadBusIdException("אוטובוס לא קיים", ex);
+                throw new BO.BadBusIdException(ex.Message, ex);
             }
-            
         }
         #endregion Bus
     }

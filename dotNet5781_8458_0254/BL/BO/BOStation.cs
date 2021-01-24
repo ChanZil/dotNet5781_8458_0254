@@ -4,6 +4,11 @@ using System.Text;
 
 namespace BO
 {
+    /// <summary>
+    /// This BO class based on DO.Station. 
+    /// It also has a collection of BO.BOLineStation- lines that passes in this station, that based on: 
+    /// DO.Line + DO.LineStation
+    /// </summary>
     public class BOStation
     {
         public int Code { get; set; } //code station

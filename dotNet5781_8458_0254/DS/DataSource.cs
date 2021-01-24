@@ -1171,15 +1171,17 @@ namespace DS
 
             #endregion InitialLineTrip
             #region InitialAdjacentStations
-
             listAdjacentStations = new List<AdjacentStations>();
+
             foreach (LineStation item in listLineStations)
                 if (item.NextStation != 0)
                 {
-                    AdjacentStations ads = new AdjacentStations();
-                    ads.Station1 = item.Station;
-                    ads.Station2 = item.NextStation;
-                    //calculate distance and time
+                    AdjacentStations ads = new AdjacentStations
+                    {
+                        LineId = item.LineId,
+                        Station1 = item.Station,
+                        Station2 = item.NextStation
+                    };
                     listAdjacentStations.Add(ads);
                 }
 

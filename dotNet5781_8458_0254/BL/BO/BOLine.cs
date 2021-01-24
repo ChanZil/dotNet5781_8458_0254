@@ -5,6 +5,11 @@ using System.Linq;
 
 namespace BO
 {
+    /// <summary>
+    /// This BO class based on: DO.Line + DO.LineTrip 
+    /// It also has a collection of BO.BOStationInLine- stations in this line, that based on: 
+    /// DO.Station + DO.LineStation + DO.AdjacentStations
+    /// </summary>
     public class BOLine
     {
         public int Id { get; set; } //id of the bus line 

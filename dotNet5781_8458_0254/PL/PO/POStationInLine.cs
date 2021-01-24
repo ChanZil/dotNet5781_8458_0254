@@ -27,24 +27,6 @@ namespace PO
             DependencyProperty.Register("Name",
             typeof(string), typeof(POStationInLine));
 
-        public double Longitude
-        {
-            get { return (double)GetValue(LongitudeProperty); }
-            set { SetValue(LongitudeProperty, value); }
-        }
-        public static readonly DependencyProperty LongitudeProperty =
-            DependencyProperty.Register("Longitude",
-            typeof(double), typeof(POStationInLine));
-
-        public double Latitude
-        {
-            get { return (double)GetValue(LatitudeProperty); }
-            set { SetValue(LatitudeProperty, value); }
-        }
-        public static readonly DependencyProperty LatitudeProperty =
-            DependencyProperty.Register("Latitude",
-            typeof(double), typeof(POStationInLine));
-
         public string Address
         {
             get { return (string)GetValue(AddressProperty); }
@@ -53,5 +35,27 @@ namespace PO
         public static readonly DependencyProperty AddressProperty =
             DependencyProperty.Register("Address",
             typeof(string), typeof(POStationInLine));
+
+        public double Distance
+        {
+            get { return (double)GetValue(DistanceProperty); }
+            set { SetValue(DistanceProperty, value); }
+        }
+        public static readonly DependencyProperty DistanceProperty =
+            DependencyProperty.Register("Distance",
+            typeof(double), typeof(POStationInLine));
+
+        public TimeSpan Time
+        {
+            get { return (TimeSpan)GetValue(TimeProperty); }
+            set { SetValue(TimeProperty, value); }
+        }
+        public static readonly DependencyProperty TimeProperty =
+            DependencyProperty.Register("Time",
+            typeof(TimeSpan), typeof(POStationInLine));
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

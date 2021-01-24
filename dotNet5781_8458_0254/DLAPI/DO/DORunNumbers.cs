@@ -6,7 +6,6 @@ namespace DO
 {
     public static class DORunNumbers
     {
-        public static int RunIdBusOnTrip = 1;
-        public static int RunIdLine = 10;
+        public static int RunIdLine = 11;
     }
 }

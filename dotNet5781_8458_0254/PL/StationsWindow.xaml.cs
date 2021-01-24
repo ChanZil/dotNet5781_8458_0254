@@ -26,30 +26,36 @@ namespace PL
         public StationsWindow()
         {
             InitializeComponent();
-
-            foreach (BO.BOStation station in bl.GetAllStations())
+            try
             {
-                PO.POStation pOStation = new PO.POStation
+                foreach (BO.BOStation station in bl.GetAllStations())
                 {
-                    Code = station.Code,
-                    Name = station.Name,
-                    Address = station.Address,
-                    Longitude = station.Longitude,
-                    Latitude = station.Latitude
-                };
-                foreach (BO.BOLineStation bOLineStation in bl.GetAllLineStationByStationId(station.Code))
-                {
-                    PO.POLineStation pOLineStation = new PO.POLineStation
+                    PO.POStation pOStation = new PO.POStation
                     {
-                        Id = bOLineStation.Id,
-                        Code = bOLineStation.Code,
-                        LineStationIndex = bOLineStation.LineStationIndex
+                        Code = station.Code,
+                        Name = station.Name,
+                        Address = station.Address,
+                        Longitude = station.Longitude,
+                        Latitude = station.Latitude
                     };
-                    pOStation.ListOfLineStations.Add(pOLineStation);
+                    foreach (BO.BOLineStation bOLineStation in bl.GetAllLineStationByStationId(station.Code))
+                    {
+                        PO.POLineStation pOLineStation = new PO.POLineStation
+                        {
+                            Id = bOLineStation.Id,
+                            Code = bOLineStation.Code,
+                            LineStationIndex = bOLineStation.LineStationIndex
+                        };
+                        pOStation.ListOfLineStations.Add(pOLineStation);
+                    }
+                    pOStations.Add(pOStation);
                 }
-                pOStations.Add(pOStation);
+                pOStationDataGrid.DataContext = pOStations;
             }
-            pOStationDataGrid.DataContext = pOStations;
+            catch(BO.BadLineIdExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -114,15 +120,15 @@ namespace PL
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
             PO.POStation pOStation = pOStationDataGrid.SelectedItem as PO.POStation;
-            UpdateStationWindow updateStationWindow = new UpdateStationWindow(pOStation);
-            updateStationWindow.Show();
+            StationDetailsWindow stationDetailsWindow = new StationDetailsWindow(pOStation);
+            stationDetailsWindow.Show();
 
         }
 
         private void btnAddStation_Click(object sender, RoutedEventArgs e)
         {
-            AddStationWindow stationWindow = new AddStationWindow(pOStations);
-            stationWindow.Show();
+            StationDetailsWindow stationDetailsWindow = new StationDetailsWindow(pOStations);
+            stationDetailsWindow.Show();
         }
     }
 }

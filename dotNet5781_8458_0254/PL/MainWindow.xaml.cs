@@ -25,19 +25,16 @@ namespace PL
         {
             InitializeComponent();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LinesWindow linesWindow = new LinesWindow();
             linesWindow.Show();
         }
-
         private void btnShowStations_Click(object sender, RoutedEventArgs e)
         {
             StationsWindow stationsWindow = new StationsWindow();
             stationsWindow.Show();
         }
-
         private void btnShowBus_Click(object sender, RoutedEventArgs e)
         {
             BusWindow busWindow = new BusWindow();

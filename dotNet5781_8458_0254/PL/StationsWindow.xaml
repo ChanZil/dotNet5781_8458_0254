@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:PO="clr-namespace:PO" xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.StationsWindow"
         mc:Ignorable="d"
-        Title="StationsWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="תצוגת תחנות" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="pOStationViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POStation}, CreateList=True}"/>
         <CollectionViewSource x:Key="bOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BOLineStation}, CreateList=True}"/>
@@ -14,9 +14,9 @@
     </Window.Resources>
     <Grid DataContext="{StaticResource pOStationViewSource}">
 
-        <DataGrid x:Name="pOStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="397,41,10,104" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft" SelectionChanged="pOStationDataGrid_SelectionChanged">
+        <DataGrid x:Name="pOStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="295,41,46,34" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft" SelectionChanged="pOStationDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTemplateColumn x:Name="codeColumn" Width="100" Header="מספר תחנה">
+                <DataGridTemplateColumn x:Name="codeColumn" Width="80" Header="מספר תחנה">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Code}"/>
@@ -30,14 +30,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="addressColumn" Width="100" Header="כתובת">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Address}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="showLinesColumn" Width="100" Header="">
+                <DataGridTemplateColumn x:Name="showLinesColumn" Width="70" Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="הצג קווים" Click="btnShowLines_Click"/>
@@ -47,11 +40,11 @@
                 <DataGridTemplateColumn x:Name="updateStationColumn" Width="100" Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="עדכן" Click="btnUpdateStation_Click"/>
+                            <Button Content="הצג/ עדכן תחנה" Click="btnUpdateStation_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="deleteStationColumn" Width="100" Header="">
+                <DataGridTemplateColumn x:Name="deleteStationColumn" Width="50" Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="מחק" Click="btnDeleteStation_Click"/>
@@ -60,17 +53,17 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAddStation" Content="הוסף תחנה" HorizontalAlignment="Left" Margin="81,365,0,0" VerticalAlignment="Top" Width="75" Click="btnAddStation_Click"/>
-        <DataGrid x:Name="pOLineStationDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource pOLineStationViewSource}}" Margin="101,41,466,178" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft">
+        <Button x:Name="btnAddStation" Content="הוסף תחנה" HorizontalAlignment="Left" Margin="85,365,0,0" VerticalAlignment="Top" Width="75" Click="btnAddStation_Click"/>
+        <DataGrid x:Name="pOLineStationDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource pOLineStationViewSource}}" Margin="52,41,518,158" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft">
             <DataGrid.Columns>
-                <DataGridTemplateColumn x:Name="codeColumn1" Header="מספר תחנה" Width="SizeToHeader">
+                <DataGridTemplateColumn x:Name="codeColumn1" Header="מספר קו" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Code}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="areaColumn" Header="אזור" Width="SizeToHeader">
+                <DataGridTemplateColumn x:Name="areaColumn" Header="אזור" Width="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Area}"/>

@@ -64,6 +64,6 @@ namespace PO
             DependencyProperty.Register("Frequency",
             typeof(TimeSpan), typeof(POLines));
 
-        public ObservableCollection<POStationInLine> ListOfStationInLine { get; } = new ObservableCollection<POStationInLine>();
+        public ObservableCollection<POStationInLine> ListOfStationInLine { get; set; } = new ObservableCollection<POStationInLine>();
     }
 }

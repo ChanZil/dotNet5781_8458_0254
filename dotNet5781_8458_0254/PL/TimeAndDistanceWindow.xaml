@@ -1,0 +1,25 @@
+﻿<Window x:Class="PL.TimeAndDistanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="הוספת זמן ומרחק" Height="350" Width="600">
+    <Grid>
+        <Label Content=":תחנה נוכחית" HorizontalAlignment="Left" Margin="401,47,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content=":תחנה הבאה" HorizontalAlignment="Left" Margin="91,47,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lblCurrentStation" Content="" HorizontalAlignment="Left" Margin="366,81,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lblNextStation" Content="" HorizontalAlignment="Left" Margin="54,81,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox x:Name="txbDistance" HorizontalAlignment="Left" Height="23" Margin="209,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
+        <Label Content="מרחק" HorizontalAlignment="Left" Margin="355,197,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="זמן" HorizontalAlignment="Left" Margin="355,236,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="btnAddTimeDistance" Content="הוסף/ עדכן" HorizontalAlignment="Left" Margin="36,266,0,0" VerticalAlignment="Top" Width="75" Click="btnAddTimeDistance_Click"/>
+        <TextBox x:Name="tbTimeH" HorizontalAlignment="Left" Height="23" Margin="212,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28"/>
+        <TextBox x:Name="tbTimeM" HorizontalAlignment="Left" Height="23" Margin="259,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox x:Name="tbTimeS" HorizontalAlignment="Left" Height="23" Margin="308,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="24"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="243,236,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="292,238,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+
+    </Grid>
+</Window>
