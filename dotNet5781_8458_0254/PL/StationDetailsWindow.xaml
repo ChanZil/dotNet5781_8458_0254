@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="פרטי תחנה" Height="350" Width="550">
-    <Grid>
+    <Grid Background="#FFE282F1">
         <Label Content="שם תחנה" HorizontalAlignment="Left" Margin="414,95,0,0" VerticalAlignment="Top" Width="60"/>
         <Label Content="כתובת" HorizontalAlignment="Left" Margin="430,143,0,0" VerticalAlignment="Top"/>
         <Label Content="קו אורך" HorizontalAlignment="Left" Margin="425,187,0,0" VerticalAlignment="Top"/>

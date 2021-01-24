@@ -12,7 +12,7 @@
         <CollectionViewSource x:Key="bOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:BOLineStation}, CreateList=True}"/>
         <CollectionViewSource x:Key="pOLineStationViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POLineStation}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource pOStationViewSource}">
+    <Grid DataContext="{StaticResource pOStationViewSource}" Background="#FFE282F1">
 
         <DataGrid x:Name="pOStationDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="295,41,46,34" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FlowDirection="RightToLeft" SelectionChanged="pOStationDataGrid_SelectionChanged">
             <DataGrid.Columns>

@@ -53,7 +53,7 @@ namespace BL
                     if (bOStationInLine.Code != listOfStationInLine.First().Code)
                         prev = listOfStationInLine.ElementAt(i - 1).Code;
                     if (bOStationInLine.Code != listOfStationInLine.Last().Code)
-                        prev = listOfStationInLine.ElementAt(i + 1).Code;
+                        next = listOfStationInLine.ElementAt(i + 1).Code;
                     CreateStationInLine(id, bOStationInLine.Code, bOStationInLine.Distance, bOStationInLine.Time, i, prev, next);
                     i++;
                 }
@@ -254,15 +254,15 @@ namespace BL
                 {
                     if (lineStationPointer.PrevStation != 0)
                     {
-                        var x = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.PrevStation);
-                        x.NextStation = lineStationPointer.NextStation;
-                        dl.UpdateLineStation(x);
+                        var updatedLineStation = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.PrevStation);
+                        updatedLineStation.NextStation = lineStationPointer.NextStation;
+                        dl.UpdateLineStation(updatedLineStation);
                     }
                     if (lineStationPointer.NextStation != 0)
                     {
-                        var x = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.NextStation);
-                        x.PrevStation = lineStationPointer.PrevStation;
-                        dl.UpdateLineStation(x);
+                        var updatedLineStation = dl.GetLineStation(lineStationPointer.LineId, lineStationPointer.NextStation);
+                        updatedLineStation.PrevStation = lineStationPointer.PrevStation;
+                        dl.UpdateLineStation(updatedLineStation);
                     }
                     DO.LineStation pointer = lineStationPointer;
                     while(pointer.NextStation != 0)

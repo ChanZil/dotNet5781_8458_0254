@@ -66,18 +66,12 @@ namespace PL
             lbLineStations.ItemsSource = pOStationInLines;
             pOLine = line;
             btnAddLine.Visibility = Visibility.Hidden;
-
-            //var x = (DataGridRow)pOStationInLineDataGrid.ItemContainerGenerator.ContainerFromIndex(3);
-            
-            //foreach(PO.POStationInLine item1 in pOAllStationInLines)
-            //    foreach(PO.POStationInLine item2 in pOStationInLines)
-            //        if(item1.Code == item2.Code)
-            //        {
-
-            //            var x =(DataGridRow)pOStationInLineDataGrid.ItemContainerGenerator.ContainerFromIndex(3);
-            //            x.
-            //        }
+            foreach (PO.POStationInLine station in pOStationInLines)
+                pOAllStationInLines.Remove(station);
         }
+        /// <summary>
+        /// get all the stations to pOStationInLineDataGrid
+        /// </summary>
         private void presentStations()
         {
             foreach (BO.BOStation stationInLine in bl.GetAllStations())
@@ -87,7 +81,6 @@ namespace PL
                     Code = stationInLine.Code,
                     Name = stationInLine.Name,
                     Address = stationInLine.Address,
-                    
                 };
                 pOAllStationInLines.Add(pOStationInLine);
             }
@@ -110,6 +103,7 @@ namespace PL
         {
             PO.POStationInLine pOStationInLine = pOStationInLineDataGrid.SelectedValue as PO.POStationInLine;
             pOStationInLines.Add(pOStationInLine);
+            pOAllStationInLines.Remove(pOStationInLine);
         }
 
         private void btnAddLine_Click(object sender, RoutedEventArgs e)
@@ -167,8 +161,7 @@ namespace PL
 
         private void checkedAddStation_UnChecked(object sender, RoutedEventArgs e)
         {
-            PO.POStationInLine pOStationInLine = pOStationInLineDataGrid.SelectedValue as PO.POStationInLine;
-            pOStationInLines.Remove(pOStationInLine);
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -286,6 +279,18 @@ namespace PL
                        Distance = station.Distance,
                        Time = station.Time
                    };
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbLineStations.SelectedIndex == -1)
+                MessageBox.Show("יש לבחור תחנה");
+            else
+            {
+                PO.POStationInLine pOStationInLine = lbLineStations.SelectedValue as PO.POStationInLine;
+                pOStationInLines.Remove(pOStationInLine);
+                pOAllStationInLines.Add(pOStationInLine);
+            }
         }
     }
 }

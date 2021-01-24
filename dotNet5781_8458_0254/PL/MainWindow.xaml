@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="" Height="{x:Static SystemParameters.PrimaryScreenHeight}" Width="{x:Static SystemParameters.PrimaryScreenWidth}" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button x:Name="btnShowLines" Content="רשימת קווים" HorizontalAlignment="Left" Margin="158,330,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button x:Name="btnShowStations" Content="רשימת תחנות" HorizontalAlignment="Left" Margin="158,278,0,0" VerticalAlignment="Top" Width="75" Click="btnShowStations_Click"/>
-        <Button x:Name="btnShowBus" Content="רשימת אוטובוסים" HorizontalAlignment="Left" Margin="158,237,0,0" VerticalAlignment="Top" Width="118" Click="btnShowBus_Click"/>
+    <Grid Background="#FFE8B6E5">
+        <Button x:Name="btnShowLines" Content="רשימת קווים" HorizontalAlignment="Left" Margin="112,501,0,0" VerticalAlignment="Top" Width="274" Click="Button_Click" Height="124" FontSize="30" FontFamily="Vivaldi" FontWeight="Bold" Background="#FFF9F9F9"/>
+        <Button x:Name="btnShowStations" Content="רשימת תחנות" HorizontalAlignment="Left" Margin="112,335,0,0" VerticalAlignment="Top" Width="274" Click="btnShowStations_Click" RenderTransformOrigin="0.747,-1.55" Height="124" FontSize="30" TextOptions.TextHintingMode="Fixed" FontFamily="Vivaldi" FontWeight="Bold" Background="#FFF9F9F9"/>
+        <Button x:Name="btnShowBus" Content="רשימת אוטובוסים" HorizontalAlignment="Left" Margin="112,179,0,0" VerticalAlignment="Top" Width="274" Click="btnShowBus_Click" Height="124" FontSize="30" TextOptions.TextHintingMode="Fixed" Background="White" FontFamily="Vivaldi" FontWeight="Bold"/>
 
     </Grid>
 </Window>

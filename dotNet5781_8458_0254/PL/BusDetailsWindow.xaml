@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="פרטי אוטובוס" Height="350" Width="550">
-    <Grid>
+    <Grid Background="#FFE282F1">
         <Label Content="מספר רישוי" HorizontalAlignment="Left" Margin="425,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.857,-0.231"/>
         <Label Content="תאריך התחלה" HorizontalAlignment="Left" Margin="409,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,1.077"/>
         <Label Content="נסועה" HorizontalAlignment="Left" Margin="453,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.976,0.5"/>

@@ -11,7 +11,7 @@
         <CollectionViewSource x:Key="pOLinesViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POLines}, CreateList=True}"/>
         <CollectionViewSource x:Key="pOStationInLineViewSource" d:DesignSource="{d:DesignInstance {x:Type PO:POStationInLine}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource pOLinesViewSource}">
+    <Grid DataContext="{StaticResource pOLinesViewSource}" Background="#FFE282F1">
         <DataGrid x:Name="pOLinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="455,26,21,44" RowDetailsVisibilityMode="VisibleWhenSelected" FlowDirection="RightToLeft">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="codeColumn" Header="מספר קו" Width="SizeToHeader">
